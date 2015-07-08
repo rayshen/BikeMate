@@ -9,11 +9,21 @@
 /* Begin PBXBuildFile section */
 		642AA3F31B4D331C002D255D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3F21B4D331C002D255D /* main.m */; };
 		642AA3F61B4D331C002D255D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3F51B4D331C002D255D /* AppDelegate.m */; };
-		642AA3F91B4D331C002D255D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3F81B4D331C002D255D /* ViewController.m */; };
 		642AA3FC1B4D331C002D255D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 642AA3FA1B4D331C002D255D /* Main.storyboard */; };
 		642AA3FE1B4D331C002D255D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 642AA3FD1B4D331C002D255D /* Images.xcassets */; };
 		642AA4011B4D331C002D255D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642AA3FF1B4D331C002D255D /* LaunchScreen.xib */; };
 		642AA40D1B4D331C002D255D /* Lock2015Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA40C1B4D331C002D255D /* Lock2015Tests.m */; };
+		642AA41D1B4D3330002D255D /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4181B4D3330002D255D /* RECommonFunctions.m */; };
+		642AA41E1B4D3330002D255D /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA41A1B4D3330002D255D /* RESideMenu.m */; };
+		642AA41F1B4D3330002D255D /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA41C1B4D3330002D255D /* UIViewController+RESideMenu.m */; };
+		642AA4321B4D3349002D255D /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4241B4D3349002D255D /* IndexViewController.m */; };
+		642AA4331B4D3349002D255D /* DEMOLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4261B4D3349002D255D /* DEMOLeftMenuViewController.m */; };
+		642AA4341B4D3349002D255D /* DEMORightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4281B4D3349002D255D /* DEMORightMenuViewController.m */; };
+		642AA4351B4D3349002D255D /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA42A1B4D3349002D255D /* RecordViewController.m */; };
+		642AA43F1B4D3BE6002D255D /* BikefindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA43E1B4D3BE6002D255D /* BikefindViewController.m */; };
+		642AA4421B4D3C29002D255D /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4411B4D3C29002D255D /* SettingViewController.m */; };
+		642AA4461B4D44F7002D255D /* RecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4441B4D44F7002D255D /* RecordCell.m */; };
+		642AA4471B4D44F7002D255D /* RecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642AA4451B4D44F7002D255D /* RecordCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +42,33 @@
 		642AA3F21B4D331C002D255D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		642AA3F41B4D331C002D255D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		642AA3F51B4D331C002D255D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		642AA3F71B4D331C002D255D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		642AA3F81B4D331C002D255D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		642AA3FB1B4D331C002D255D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		642AA3FD1B4D331C002D255D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		642AA4001B4D331C002D255D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		642AA4061B4D331C002D255D /* Lock2015Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Lock2015Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		642AA40B1B4D331C002D255D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		642AA40C1B4D331C002D255D /* Lock2015Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Lock2015Tests.m; sourceTree = "<group>"; };
+		642AA4171B4D3330002D255D /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
+		642AA4181B4D3330002D255D /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
+		642AA4191B4D3330002D255D /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
+		642AA41A1B4D3330002D255D /* RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenu.m; sourceTree = "<group>"; };
+		642AA41B1B4D3330002D255D /* UIViewController+RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RESideMenu.h"; sourceTree = "<group>"; };
+		642AA41C1B4D3330002D255D /* UIViewController+RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RESideMenu.m"; sourceTree = "<group>"; };
+		642AA4231B4D3349002D255D /* IndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexViewController.h; sourceTree = "<group>"; };
+		642AA4241B4D3349002D255D /* IndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexViewController.m; sourceTree = "<group>"; };
+		642AA4251B4D3349002D255D /* DEMOLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEMOLeftMenuViewController.h; path = Lock2015/RESideMenuExample/DEMOLeftMenuViewController.h; sourceTree = SOURCE_ROOT; };
+		642AA4261B4D3349002D255D /* DEMOLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEMOLeftMenuViewController.m; path = Lock2015/RESideMenuExample/DEMOLeftMenuViewController.m; sourceTree = SOURCE_ROOT; };
+		642AA4271B4D3349002D255D /* DEMORightMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DEMORightMenuViewController.h; path = Lock2015/RESideMenuExample/DEMORightMenuViewController.h; sourceTree = SOURCE_ROOT; };
+		642AA4281B4D3349002D255D /* DEMORightMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DEMORightMenuViewController.m; path = Lock2015/RESideMenuExample/DEMORightMenuViewController.m; sourceTree = SOURCE_ROOT; };
+		642AA4291B4D3349002D255D /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
+		642AA42A1B4D3349002D255D /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
+		642AA43D1B4D3BE6002D255D /* BikefindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BikefindViewController.h; sourceTree = "<group>"; };
+		642AA43E1B4D3BE6002D255D /* BikefindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BikefindViewController.m; sourceTree = "<group>"; };
+		642AA4401B4D3C29002D255D /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		642AA4411B4D3C29002D255D /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		642AA4431B4D44F7002D255D /* RecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordCell.h; sourceTree = "<group>"; };
+		642AA4441B4D44F7002D255D /* RecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordCell.m; sourceTree = "<group>"; };
+		642AA4451B4D44F7002D255D /* RecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,13 +110,13 @@
 		642AA3EF1B4D331C002D255D /* Lock2015 */ = {
 			isa = PBXGroup;
 			children = (
-				642AA3F41B4D331C002D255D /* AppDelegate.h */,
-				642AA3F51B4D331C002D255D /* AppDelegate.m */,
-				642AA3F71B4D331C002D255D /* ViewController.h */,
-				642AA3F81B4D331C002D255D /* ViewController.m */,
+				642AA3FF1B4D331C002D255D /* LaunchScreen.xib */,
 				642AA3FA1B4D331C002D255D /* Main.storyboard */,
 				642AA3FD1B4D331C002D255D /* Images.xcassets */,
-				642AA3FF1B4D331C002D255D /* LaunchScreen.xib */,
+				642AA3F41B4D331C002D255D /* AppDelegate.h */,
+				642AA3F51B4D331C002D255D /* AppDelegate.m */,
+				642AA4161B4D3330002D255D /* RESideMenuFunction */,
+				642AA4201B4D3349002D255D /* Controllers */,
 				642AA3F01B4D331C002D255D /* Supporting Files */,
 			);
 			path = Lock2015;
@@ -117,6 +146,43 @@
 				642AA40B1B4D331C002D255D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		642AA4161B4D3330002D255D /* RESideMenuFunction */ = {
+			isa = PBXGroup;
+			children = (
+				642AA4171B4D3330002D255D /* RECommonFunctions.h */,
+				642AA4181B4D3330002D255D /* RECommonFunctions.m */,
+				642AA41B1B4D3330002D255D /* UIViewController+RESideMenu.h */,
+				642AA41C1B4D3330002D255D /* UIViewController+RESideMenu.m */,
+				642AA4191B4D3330002D255D /* RESideMenu.h */,
+				642AA41A1B4D3330002D255D /* RESideMenu.m */,
+			);
+			name = RESideMenuFunction;
+			path = RESideMenu;
+			sourceTree = "<group>";
+		};
+		642AA4201B4D3349002D255D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				642AA4251B4D3349002D255D /* DEMOLeftMenuViewController.h */,
+				642AA4261B4D3349002D255D /* DEMOLeftMenuViewController.m */,
+				642AA4271B4D3349002D255D /* DEMORightMenuViewController.h */,
+				642AA4281B4D3349002D255D /* DEMORightMenuViewController.m */,
+				642AA4231B4D3349002D255D /* IndexViewController.h */,
+				642AA4241B4D3349002D255D /* IndexViewController.m */,
+				642AA4291B4D3349002D255D /* RecordViewController.h */,
+				642AA42A1B4D3349002D255D /* RecordViewController.m */,
+				642AA4431B4D44F7002D255D /* RecordCell.h */,
+				642AA4441B4D44F7002D255D /* RecordCell.m */,
+				642AA4451B4D44F7002D255D /* RecordCell.xib */,
+				642AA43D1B4D3BE6002D255D /* BikefindViewController.h */,
+				642AA43E1B4D3BE6002D255D /* BikefindViewController.m */,
+				642AA4401B4D3C29002D255D /* SettingViewController.h */,
+				642AA4411B4D3C29002D255D /* SettingViewController.m */,
+			);
+			name = Controllers;
+			path = RESideMenuExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +267,7 @@
 			files = (
 				642AA3FC1B4D331C002D255D /* Main.storyboard in Resources */,
 				642AA4011B4D331C002D255D /* LaunchScreen.xib in Resources */,
+				642AA4471B4D44F7002D255D /* RecordCell.xib in Resources */,
 				642AA3FE1B4D331C002D255D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,9 +286,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				642AA3F91B4D331C002D255D /* ViewController.m in Sources */,
+				642AA4331B4D3349002D255D /* DEMOLeftMenuViewController.m in Sources */,
+				642AA4321B4D3349002D255D /* IndexViewController.m in Sources */,
+				642AA4461B4D44F7002D255D /* RecordCell.m in Sources */,
 				642AA3F61B4D331C002D255D /* AppDelegate.m in Sources */,
 				642AA3F31B4D331C002D255D /* main.m in Sources */,
+				642AA4341B4D3349002D255D /* DEMORightMenuViewController.m in Sources */,
+				642AA4351B4D3349002D255D /* RecordViewController.m in Sources */,
+				642AA41E1B4D3330002D255D /* RESideMenu.m in Sources */,
+				642AA43F1B4D3BE6002D255D /* BikefindViewController.m in Sources */,
+				642AA41D1B4D3330002D255D /* RECommonFunctions.m in Sources */,
+				642AA4421B4D3C29002D255D /* SettingViewController.m in Sources */,
+				642AA41F1B4D3330002D255D /* UIViewController+RESideMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
