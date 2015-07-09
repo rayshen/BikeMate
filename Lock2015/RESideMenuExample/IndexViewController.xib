@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IndexViewController">
+            <connections>
+                <outlet property="chart" destination="YxQ-LU-Tv2" id="IFq-rE-UVc"/>
+                <outlet property="lockbutton" destination="ced-2d-tUv" id="zJe-5h-VXG"/>
+                <outlet property="setbutton" destination="QXM-0T-7wP" id="Lon-4E-cjD"/>
+                <outlet property="sidebutton" destination="Gy8-RF-BjT" id="CvX-hD-ZCU"/>
+                <outlet property="view" destination="iN0-l3-epB" id="zWE-qH-k3R"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gy8-RF-BjT">
+                    <rect key="frame" x="16" y="20" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="P4e-8E-7T6"/>
+                        <constraint firstAttribute="width" constant="48" id="mCq-p3-l2T"/>
+                    </constraints>
+                    <state key="normal" image="menuIcon">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXM-0T-7wP">
+                    <rect key="frame" x="529" y="534" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="crK-J8-iqj"/>
+                        <constraint firstAttribute="height" constant="48" id="ypw-xW-2Ym"/>
+                    </constraints>
+                    <state key="normal" image="IconSettings">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ced-2d-tUv">
+                    <rect key="frame" x="225" y="225" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="Hht-of-A7h"/>
+                        <constraint firstAttribute="width" constant="150" id="VJT-FP-jWB"/>
+                    </constraints>
+                    <state key="normal" image="onlock">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YxQ-LU-Tv2" customClass="CBCCylinderBudgetChartView">
+                    <rect key="frame" x="23" y="482" width="50" height="100"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="5he-xv-wqB"/>
+                        <constraint firstAttribute="width" constant="50" id="hHe-C9-vRC"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Gy8-RF-BjT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="67i-p8-vCT"/>
+                <constraint firstAttribute="centerX" secondItem="ced-2d-tUv" secondAttribute="centerX" id="7N7-Xt-tBg"/>
+                <constraint firstItem="YxQ-LU-Tv2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Ddh-Gu-4bI"/>
+                <constraint firstAttribute="centerY" secondItem="ced-2d-tUv" secondAttribute="centerY" id="Ujv-BY-zE5"/>
+                <constraint firstAttribute="bottom" secondItem="YxQ-LU-Tv2" secondAttribute="bottom" constant="20" id="VF7-ml-56F"/>
+                <constraint firstAttribute="bottom" secondItem="QXM-0T-7wP" secondAttribute="bottom" constant="20" id="heN-T6-aJk"/>
+                <constraint firstItem="Gy8-RF-BjT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="p0U-r4-7rd"/>
+                <constraint firstAttribute="trailing" secondItem="QXM-0T-7wP" secondAttribute="trailing" constant="20" id="vlQ-u2-H7p"/>
+            </constraints>
+            <point key="canvasLocation" x="402" y="262"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="IconSettings" width="32" height="32"/>
+        <image name="menuIcon" width="128" height="128"/>
+        <image name="onlock" width="256" height="256"/>
+    </resources>
+</document>

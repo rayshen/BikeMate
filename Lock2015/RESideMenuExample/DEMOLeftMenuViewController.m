@@ -15,6 +15,8 @@
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 
+@property int sumitems;
+
 @end
 
 @implementation DEMOLeftMenuViewController
@@ -22,8 +24,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _sumitems=4;
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 5) / 2.0f, self.view.frame.size.width, 54 * 5) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * _sumitems) / 2.0f, self.view.frame.size.width, 54 * _sumitems) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -84,7 +87,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 4;
+    return _sumitems;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

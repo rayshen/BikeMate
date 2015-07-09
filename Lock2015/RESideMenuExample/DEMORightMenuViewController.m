@@ -14,7 +14,7 @@
 @interface DEMORightMenuViewController ()
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
-
+@property int sumitems;
 @end
 
 @implementation DEMORightMenuViewController
@@ -22,9 +22,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _sumitems=3;
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-220, (self.view.frame.size.height - 54 * 3) / 2.0f, 220, 54 * 3) style:UITableViewStylePlain];
-        tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-220, (self.view.frame.size.height - 54 * _sumitems) / 2.0f, 220, 54 * _sumitems) style:UITableViewStylePlain];
+        tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin;
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.opaque = NO;
@@ -76,7 +77,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 3;
+    return _sumitems;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -11,5 +11,9 @@
 #import "CBCCylinderBudgetChartView.h"
 
 @interface IndexViewController : UIViewController<CBCCylinderBudgetChartViewDataSource, CBCCylinderBudgetChartViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *sidebutton;
+@property (weak, nonatomic) IBOutlet UIButton *setbutton;
+@property (weak, nonatomic) IBOutlet UIButton *lockbutton;
+@property (weak, nonatomic) IBOutlet CBCCylinderBudgetChartView *chart;
 
 @end

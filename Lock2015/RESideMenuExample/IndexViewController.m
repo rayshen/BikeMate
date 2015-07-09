@@ -16,11 +16,8 @@
     
     CGFloat batteryvalue;
 }
-@property CBCCylinderBudgetChartView *chart;
 
 @property int Lockstate;
-
-@property UIButton *lockbutton;
 
 @end
 
@@ -43,31 +40,20 @@
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     imageView.image = [UIImage imageNamed:@"Balloon"];
-    [self.view addSubview:imageView];
+    [self.view insertSubview:imageView atIndex:0];
     
-    UIButton *sidebutton=[[UIButton alloc]initWithFrame:CGRectMake(16, 20, 48, 48)];
-    [sidebutton setImage:[UIImage imageNamed:@"menuIcon"] forState:UIControlStateNormal];
-    [sidebutton addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:sidebutton];
+    [_sidebutton addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *setbutton=[[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-60, self.view.bounds.size.height-60, 48, 48)];
-    [setbutton setImage:[UIImage imageNamed:@"IconSettings"] forState:UIControlStateNormal];
-    [setbutton addTarget:self action:@selector(presentRightMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:setbutton];
+    [_setbutton addTarget:self action:@selector(presentRightMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     
-    _lockbutton=[[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2-65,self.view.bounds.size.height/2-150, 150, 150)];
-    [_lockbutton setImage:[UIImage imageNamed:@"onlock"] forState:UIControlStateNormal];
     [_lockbutton addTarget:self action:@selector(lockbuttonclk:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_lockbutton];
     _Lockstate=isONLOCK;
     
     //===========================================
-    _chart=[[CBCCylinderBudgetChartView alloc]initWithFrame:CGRectMake(20,self.view.bounds.size.height-120, 50, 100)];
-    [self.view addSubview:_chart];
     batteryvalue = 50;
-    self.chart.delegate = self;
-    self.chart.dataSource = self;
-    [self.chart reloadData];
+    _chart.delegate = self;
+    _chart.dataSource = self;
+    [_chart reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated

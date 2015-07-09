@@ -47,6 +47,7 @@
 		642AA4951B4E0CA7002D255D /* HSDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4931B4E0CA7002D255D /* HSDatePickerViewController.m */; };
 		642AA4961B4E0CA7002D255D /* HSDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642AA4941B4E0CA7002D255D /* HSDatePickerViewController.xib */; };
 		642AA4991B4E155C002D255D /* Networkoperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4981B4E155C002D255D /* Networkoperation.m */; };
+		642AA49B1B4E440C002D255D /* IndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642AA49A1B4E440C002D255D /* IndexViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		642AA4941B4E0CA7002D255D /* HSDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSDatePickerViewController.xib; sourceTree = "<group>"; };
 		642AA4971B4E155C002D255D /* Networkoperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Networkoperation.h; sourceTree = "<group>"; };
 		642AA4981B4E155C002D255D /* Networkoperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Networkoperation.m; sourceTree = "<group>"; };
+		642AA49A1B4E440C002D255D /* IndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 				642AA48E1B4D635B002D255D /* CylinderBudgetChart */,
 				642AA4231B4D3349002D255D /* IndexViewController.h */,
 				642AA4241B4D3349002D255D /* IndexViewController.m */,
+				642AA49A1B4E440C002D255D /* IndexViewController.xib */,
 				642AA4291B4D3349002D255D /* RecordViewController.h */,
 				642AA42A1B4D3349002D255D /* RecordViewController.m */,
 				642AA4861B4D5EDC002D255D /* RecordViewController.xib */,
@@ -425,6 +428,7 @@
 				642AA4901B4E0C4E002D255D /* BikefindViewController.xib in Resources */,
 				642AA4011B4D331C002D255D /* LaunchScreen.xib in Resources */,
 				642AA4961B4E0CA7002D255D /* HSDatePickerViewController.xib in Resources */,
+				642AA49B1B4E440C002D255D /* IndexViewController.xib in Resources */,
 				642AA3FE1B4D331C002D255D /* Images.xcassets in Resources */,
 				642AA4871B4D5EDC002D255D /* RecordViewController.xib in Resources */,
 			);
