@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RESideMenu.h"
+#import "CBCCylinderBudgetChartView.h"
 
-@interface IndexViewController : UIViewController
+@interface IndexViewController : UIViewController<CBCCylinderBudgetChartViewDataSource, CBCCylinderBudgetChartViewDelegate>
 
 @end

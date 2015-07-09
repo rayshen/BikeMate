@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RESideMenu.h"
-#import "RecordCell.h"
-@interface RecordViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface RecordViewController : UIViewController
 
-@property UITableView *tableView;
-
+@property (weak, nonatomic) IBOutlet UIButton *sidemenu;
+@property (weak, nonatomic) IBOutlet UILabel *okbutton;
 @end

@@ -43,24 +43,14 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(section==0){
-        return 1;
-    }
-    else if (section==1) {
-        return 1;
-    }
-    else{
-        return 1;
-    }
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    int section = (int)indexPath.section;
-    int row = (int)indexPath.row;
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -69,32 +59,26 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
-    switch (section) {
-        case 0:
-            switch (row) {
-                case 0:
-                    cell.textLabel.text = @"手势设置";
-                    cell.detailTextLabel.text=@"已设置";
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case 1:
-            switch (row) {
-                case 0:
-                    cell.textLabel.text = @"自动上锁";
-                    cell.detailTextLabel.text=@"否";
-                    break;
-                default:
-                    break;
-            }
-            break;
-        default:
-            break;
+    
+    NSArray *items =[[NSArray alloc] initWithObjects:@"靠近自动解锁",@"防盗鸣笛",@"摔倒通知亲友",nil];
+    cell.textLabel.text = items[[indexPath row]];
+    
+    UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
+    cell.accessoryView = switchview;
+    [switchview addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    switchview.tag=[indexPath row];
+    return cell;
+}
+
+-(void)switchAction:(id)sender{
+    UISwitch *switchButton = (UISwitch*)sender;
+    BOOL isButtonOn = [switchButton isOn];
+    if (isButtonOn) {
+        NSLog(@"switchButton %i turn on",switchButton.tag);
+    }else {
+        NSLog(@"switchButton %i turn off",switchButton.tag);
     }
     
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)atableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

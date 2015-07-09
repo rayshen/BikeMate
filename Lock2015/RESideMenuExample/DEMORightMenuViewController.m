@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 2) / 2.0f, self.view.frame.size.width, 54 * 2) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-220, (self.view.frame.size.height - 54 * 3) / 2.0f, 220, 54 * 3) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -76,29 +76,46 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    static NSString *CellIdentifier = @"Cell";
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
-        cell.selectedBackgroundView = [[UIView alloc] init];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     
-    NSArray *titles = @[@"Test 1", @"Test 2"];
-    cell.textLabel.text = titles[indexPath.row];
-    cell.textLabel.textAlignment = NSTextAlignmentRight;
     
+    NSArray *items =[[NSArray alloc] initWithObjects:@"靠近自动解锁",@"防盗鸣笛",@"摔倒通知亲友",nil];
+    cell.textLabel.text = items[[indexPath row]];
+    cell.textLabel.textAlignment = NSTextAlignmentRight;
+
+    
+    UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
+    cell.accessoryView = switchview;
+    [switchview addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    switchview.tag=[indexPath row];
     return cell;
+}
+
+-(void)switchAction:(id)sender{
+    UISwitch *switchButton = (UISwitch*)sender;
+    BOOL isButtonOn = [switchButton isOn];
+    if (isButtonOn) {
+        NSLog(@"switchButton %i turn on",switchButton.tag);
+    }else {
+        NSLog(@"switchButton %i turn off",switchButton.tag);
+    }
+    
 }
 
 @end

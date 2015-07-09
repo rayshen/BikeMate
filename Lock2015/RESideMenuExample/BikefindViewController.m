@@ -21,34 +21,69 @@
                                                                             action:@selector(presentLeftMenuViewController:)];
     [self.navigationItem.leftBarButtonItem setImage:[UIImage imageNamed:@"burger"]];
 
-    [self.view addSubview:({
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        button.frame = CGRectMake(0, 84, self.view.frame.size.width, 44);
-        button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        [button setTitle:@"Push View Controller" forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(pushViewController:) forControlEvents:UIControlEventTouchUpInside];
-        button;
-    })];
-}
-
-- (void)pushViewController:(id)sender
-{
-    UIViewController *viewController = [[UIViewController alloc] init];
-    viewController.title = @"Pushed Controller";
-    viewController.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController pushViewController:viewController animated:YES];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    imageView.image = [UIImage imageNamed:@"pic1"];
+    [self.view insertSubview:imageView atIndex:0];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSLog(@"DEMOSecondViewController will appear");
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    NSLog(@"DEMOSecondViewController will disappear");
 }
 
+- (IBAction)showDatePicker:(id)sender {
+    UIButton *selectbutton=(UIButton*)sender;
+    HSDatePickerViewController *hsdpvc = [HSDatePickerViewController new];
+    hsdpvc.delegate = self;
+    if (self.selectedDate) {
+        hsdpvc.date = self.selectedDate;
+    }
+    hsdpvc.index=(int)selectbutton.tag;
+    [self presentViewController:hsdpvc animated:YES completion:nil];
+}
+
+#pragma mark - HSDatePickerViewControllerDelegate
+- (void)hsDatePickerPickedDate:(NSDate *)date indexofbutton:(int)index{
+    NSLog(@"Date picked %@", date);
+    NSDateFormatter *dateFormater = [NSDateFormatter new];
+    dateFormater.dateFormat = @"yyyy.MM.dd HH:mm";
+    
+    if (index==1) {
+        self.dateLabel.text = [dateFormater stringFromDate:date];
+        self.dateLabel.textColor=[UIColor greenColor];
+        self.selectedDate = date;
+    }
+    
+    if(index==2){
+        self.datelabel2.text = [dateFormater stringFromDate:date];
+        self.datelabel2.textColor=[UIColor greenColor];
+        self.selectedDate2 = date;
+    }
+}
+
+//optional
+- (void)hsDatePickerDidDismissWithQuitMethod:(HSDatePickerQuitMethod)method {
+    NSLog(@"Picker did dismiss with %lu", method);
+}
+
+//optional
+- (void)hsDatePickerWillDismissWithQuitMethod:(HSDatePickerQuitMethod)method {
+    NSLog(@"Picker will dismiss with %lu", method);
+}
+- (IBAction)tofind:(id)sender {
+    UIViewController *viewController = [[UIViewController alloc] init];
+    viewController.title = @"Pushed Controller";
+    viewController.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController pushViewController:viewController animated:YES];
+
+}
 @end
