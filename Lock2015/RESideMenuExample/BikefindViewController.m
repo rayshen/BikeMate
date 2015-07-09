@@ -86,4 +86,16 @@
     [self.navigationController pushViewController:viewController animated:YES];
 
 }
+
+//添加侧滑手势
+-(void)addges{
+    _rightSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(gotoright)];
+    _rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.view addGestureRecognizer:_rightSwipe];
+}
+
+-(void)gotoright{
+    
+}
 @end

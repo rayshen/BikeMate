@@ -40,7 +40,6 @@
 		642AA47E1B4D4A04002D255D /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA46C1B4D4A04002D255D /* UIRefreshControl+AFNetworking.m */; };
 		642AA47F1B4D4A04002D255D /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA46E1B4D4A04002D255D /* UIWebView+AFNetworking.m */; };
 		642AA4821B4D4A0D002D255D /* ShenAFN.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4811B4D4A0D002D255D /* ShenAFN.m */; };
-		642AA4851B4D564C002D255D /* BikenaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4841B4D564C002D255D /* BikenaviViewController.m */; };
 		642AA4871B4D5EDC002D255D /* RecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642AA4861B4D5EDC002D255D /* RecordViewController.xib */; };
 		642AA48D1B4D631D002D255D /* CBCCylinderBudgetChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA48C1B4D631D002D255D /* CBCCylinderBudgetChartView.m */; };
 		642AA4901B4E0C4E002D255D /* BikefindViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642AA48F1B4E0C4E002D255D /* BikefindViewController.xib */; };
@@ -48,6 +47,7 @@
 		642AA4961B4E0CA7002D255D /* HSDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642AA4941B4E0CA7002D255D /* HSDatePickerViewController.xib */; };
 		642AA4991B4E155C002D255D /* Networkoperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4981B4E155C002D255D /* Networkoperation.m */; };
 		642AA49B1B4E440C002D255D /* IndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642AA49A1B4E440C002D255D /* IndexViewController.xib */; };
+		642AA49E1B4E4B30002D255D /* BikenaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA49D1B4E4B30002D255D /* BikenaviViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,8 +128,6 @@
 		642AA46E1B4D4A04002D255D /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		642AA4801B4D4A0D002D255D /* ShenAFN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShenAFN.h; sourceTree = "<group>"; };
 		642AA4811B4D4A0D002D255D /* ShenAFN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShenAFN.m; sourceTree = "<group>"; };
-		642AA4831B4D564C002D255D /* BikenaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BikenaviViewController.h; sourceTree = "<group>"; };
-		642AA4841B4D564C002D255D /* BikenaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BikenaviViewController.m; sourceTree = "<group>"; };
 		642AA4861B4D5EDC002D255D /* RecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordViewController.xib; sourceTree = "<group>"; };
 		642AA48B1B4D631D002D255D /* CBCCylinderBudgetChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBCCylinderBudgetChartView.h; sourceTree = "<group>"; };
 		642AA48C1B4D631D002D255D /* CBCCylinderBudgetChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBCCylinderBudgetChartView.m; sourceTree = "<group>"; };
@@ -140,6 +138,8 @@
 		642AA4971B4E155C002D255D /* Networkoperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Networkoperation.h; sourceTree = "<group>"; };
 		642AA4981B4E155C002D255D /* Networkoperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Networkoperation.m; sourceTree = "<group>"; };
 		642AA49A1B4E440C002D255D /* IndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexViewController.xib; sourceTree = "<group>"; };
+		642AA49C1B4E4B30002D255D /* BikenaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BikenaviViewController.h; sourceTree = "<group>"; };
+		642AA49D1B4E4B30002D255D /* BikenaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BikenaviViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,12 +248,12 @@
 				642AA4291B4D3349002D255D /* RecordViewController.h */,
 				642AA42A1B4D3349002D255D /* RecordViewController.m */,
 				642AA4861B4D5EDC002D255D /* RecordViewController.xib */,
-				642AA4831B4D564C002D255D /* BikenaviViewController.h */,
-				642AA4841B4D564C002D255D /* BikenaviViewController.m */,
 				642AA4911B4E0CA7002D255D /* HSDatePickerViewController */,
 				642AA43D1B4D3BE6002D255D /* BikefindViewController.h */,
 				642AA43E1B4D3BE6002D255D /* BikefindViewController.m */,
 				642AA48F1B4E0C4E002D255D /* BikefindViewController.xib */,
+				642AA49C1B4E4B30002D255D /* BikenaviViewController.h */,
+				642AA49D1B4E4B30002D255D /* BikenaviViewController.m */,
 				642AA4401B4D3C29002D255D /* SettingViewController.h */,
 				642AA4411B4D3C29002D255D /* SettingViewController.m */,
 			);
@@ -465,7 +465,6 @@
 				642AA3F31B4D331C002D255D /* main.m in Sources */,
 				642AA4341B4D3349002D255D /* DEMORightMenuViewController.m in Sources */,
 				642AA4731B4D4A04002D255D /* AFSecurityPolicy.m in Sources */,
-				642AA4851B4D564C002D255D /* BikenaviViewController.m in Sources */,
 				642AA4351B4D3349002D255D /* RecordViewController.m in Sources */,
 				642AA4751B4D4A04002D255D /* AFURLRequestSerialization.m in Sources */,
 				642AA41E1B4D3330002D255D /* RESideMenu.m in Sources */,
@@ -474,6 +473,7 @@
 				642AA4791B4D4A04002D255D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				642AA47E1B4D4A04002D255D /* UIRefreshControl+AFNetworking.m in Sources */,
 				642AA4821B4D4A0D002D255D /* ShenAFN.m in Sources */,
+				642AA49E1B4E4B30002D255D /* BikenaviViewController.m in Sources */,
 				642AA47D1B4D4A04002D255D /* UIProgressView+AFNetworking.m in Sources */,
 				642AA41D1B4D3330002D255D /* RECommonFunctions.m in Sources */,
 				642AA47F1B4D4A04002D255D /* UIWebView+AFNetworking.m in Sources */,
@@ -677,6 +677,7 @@
 				642AA4121B4D331C002D255D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		642AA4131B4D331C002D255D /* Build configuration list for PBXNativeTarget "Lock2015Tests" */ = {
 			isa = XCConfigurationList;
@@ -685,6 +686,7 @@
 				642AA4151B4D331C002D255D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
