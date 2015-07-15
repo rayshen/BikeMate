@@ -10,13 +10,13 @@
 #import "RESideMenu.h"
 #import "HSDatePickerViewController.h"
 
-@interface BikefindViewController : UIViewController <HSDatePickerViewControllerDelegate>
+@interface BikefindViewController : UIViewController <HSDatePickerViewControllerDelegate,UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *datelabel2;
 @property (nonatomic, strong) NSDate *selectedDate;
 @property (nonatomic, strong) NSDate *selectedDate2;
 - (IBAction)tofind:(id)sender;
 
-@property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
+@property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
 
 @end

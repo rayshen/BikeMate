@@ -10,4 +10,7 @@
 
 @interface Networkoperation : NSObject
 
++(Networkoperation *)shenInstance;
+
+
 @end

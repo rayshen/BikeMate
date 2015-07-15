@@ -10,4 +10,15 @@
 
 @implementation Networkoperation
 
+//创建单例
++(Networkoperation *)shenInstance
+{
+    static Networkoperation *SingleShenNetwork;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        SingleShenNetwork = [[Networkoperation alloc] init];
+    });
+    return SingleShenNetwork;
+}
 @end

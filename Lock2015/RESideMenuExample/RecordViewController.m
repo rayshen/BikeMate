@@ -34,14 +34,6 @@
     [_sidemenu addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)pushViewController:(id)sender
-{
-    UIViewController *viewController = [[UIViewController alloc] init];
-    viewController.title = @"Pushed Controller";
-    viewController.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController pushViewController:viewController animated:YES];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -57,4 +49,16 @@
     
 }
 
+- (IBAction)tonavi:(id)sender {
+    
+    MapViewController *MVC=[[MapViewController alloc]init];
+    MVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:MVC animated:YES completion:nil];
+    
+    /*
+    MapViewController *MapVC=[[MapViewController alloc]init];
+    MapVC.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:MapVC animated:YES completion:nil];
+     */
+}
 @end

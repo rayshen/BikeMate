@@ -28,6 +28,7 @@
     imageView.image = [UIImage imageNamed:@"pic1"];
     [self.view insertSubview:imageView atIndex:0];
     
+    [self addges];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -89,13 +90,13 @@
 
 //添加侧滑手势
 -(void)addges{
-    _rightSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(gotoright)];
-    _rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-    
-    [self.view addGestureRecognizer:_rightSwipe];
+    _leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(gotoright)];
+    _leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    _leftSwipe.numberOfTouchesRequired = 2;
+    [self.view addGestureRecognizer:_leftSwipe];
 }
 
 -(void)gotoright{
-    
+    NSLog(@"检测有左滑");
 }
 @end

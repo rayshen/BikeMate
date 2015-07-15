@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "RESideMenu.h"
+#import "DBTileButton.h"
+#import "MapViewController.h"
 @interface RecordViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *sidemenu;
-@property (weak, nonatomic) IBOutlet UILabel *okbutton;
+@property (weak, nonatomic) IBOutlet DBTileButton *navibutton;
+- (IBAction)tonavi:(id)sender;
+
 @end

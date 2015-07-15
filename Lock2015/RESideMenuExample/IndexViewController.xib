@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IndexViewController">
             <connections>
                 <outlet property="chart" destination="YxQ-LU-Tv2" id="IFq-rE-UVc"/>
+                <outlet property="connectingstatelabel" destination="WOv-xz-DnX" id="UYd-nn-gmq"/>
                 <outlet property="lockbutton" destination="ced-2d-tUv" id="zJe-5h-VXG"/>
                 <outlet property="setbutton" destination="QXM-0T-7wP" id="Lon-4E-cjD"/>
                 <outlet property="sidebutton" destination="Gy8-RF-BjT" id="CvX-hD-ZCU"/>
@@ -56,13 +57,25 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="连接状态" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOv-xz-DnX">
+                    <rect key="frame" x="266" y="33" width="68" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="68" id="2Xy-Wh-bjD"/>
+                        <constraint firstAttribute="height" constant="21" id="QSb-ei-wvK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="WOv-xz-DnX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="33" id="1Si-0B-zHY"/>
                 <constraint firstItem="Gy8-RF-BjT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="67i-p8-vCT"/>
                 <constraint firstAttribute="centerX" secondItem="ced-2d-tUv" secondAttribute="centerX" id="7N7-Xt-tBg"/>
                 <constraint firstItem="QXM-0T-7wP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Anl-Cj-E7w"/>
                 <constraint firstItem="YxQ-LU-Tv2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Ddh-Gu-4bI"/>
+                <constraint firstAttribute="centerX" secondItem="WOv-xz-DnX" secondAttribute="centerX" id="RWH-qI-uMl"/>
                 <constraint firstAttribute="centerY" secondItem="ced-2d-tUv" secondAttribute="centerY" id="Ujv-BY-zE5"/>
                 <constraint firstAttribute="bottom" secondItem="YxQ-LU-Tv2" secondAttribute="bottom" constant="20" id="VF7-ml-56F"/>
                 <constraint firstAttribute="bottom" secondItem="QXM-0T-7wP" secondAttribute="bottom" constant="20" id="heN-T6-aJk"/>
