@@ -7,10 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface QSearchViewController : UITableViewController<UISearchDisplayDelegate>{
+#import "ShenAFN.h"
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+
+@protocol UpdateAlertDelegate <NSObject>
+- (void)updateAlert:(NSMutableDictionary *)navidic;
+@end
+
+@interface QSearchViewController : UITableViewController<UISearchDisplayDelegate,UISearchBarDelegate>{
     NSMutableArray *recordData;
-    NSMutableArray *searchResult;
+    NSDictionary *searchResults;
+    NSMutableArray *Resultarray;
+    NSMutableArray *Resultname;
+    NSMutableArray *Resultaddr;
     UISearchDisplayController *searchDisplayController;
 }
+
+@property NSString *city;
+@property CLRegion *myregion;
+@property (nonatomic, weak) id<UpdateAlertDelegate> delegate;
 
 @end

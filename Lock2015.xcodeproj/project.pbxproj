@@ -74,9 +74,6 @@
 		6452A88F1B567EB40029A60E /* wl_map_icon_position@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6452A8761B567EB40029A60E /* wl_map_icon_position@2x.png */; };
 		6452A8901B567EB40029A60E /* wl_map_icon_position_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 6452A8771B567EB40029A60E /* wl_map_icon_position_press.png */; };
 		6452A8911B567EB40029A60E /* wl_map_icon_position_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6452A8781B567EB40029A60E /* wl_map_icon_position_press@2x.png */; };
-		6452A8971B567EBE0029A60E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6452A8931B567EBE0029A60E /* MapViewController.m */; };
-		6452A8981B567EBE0029A60E /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6452A8941B567EBE0029A60E /* MapViewController.xib */; };
-		6452A8991B567EBE0029A60E /* QSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6452A8961B567EBE0029A60E /* QSearchViewController.m */; };
 		6452A89C1B567FC30029A60E /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452A89B1B567FC30029A60E /* libicucore.dylib */; };
 		6452A89E1B567FCB0029A60E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452A89D1B567FCB0029A60E /* libz.1.2.5.dylib */; };
 		6452A8A01B567FF60029A60E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452A89F1B567FF60029A60E /* CoreGraphics.framework */; };
@@ -104,6 +101,10 @@
 		646582C21B53A55A00B61BEA /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 646582C01B53A55A00B61BEA /* 37x-Checkmark.png */; };
 		646582C31B53A55A00B61BEA /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 646582C11B53A55A00B61BEA /* 37x-Checkmark@2x.png */; };
 		646582C71B53BAC700B61BEA /* BLEOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 646582C61B53BAC700B61BEA /* BLEOperation.m */; };
+		647C24081B5E8E4300040667 /* Routepolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C24021B5E8E4300040667 /* Routepolyline.m */; };
+		647C24091B5E8E4300040667 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C24041B5E8E4300040667 /* MapViewController.m */; };
+		647C240A1B5E8E4300040667 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 647C24051B5E8E4300040667 /* MapViewController.xib */; };
+		647C240B1B5E8E4300040667 /* QSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C24071B5E8E4300040667 /* QSearchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -230,11 +231,6 @@
 		6452A8761B567EB40029A60E /* wl_map_icon_position@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wl_map_icon_position@2x.png"; sourceTree = "<group>"; };
 		6452A8771B567EB40029A60E /* wl_map_icon_position_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wl_map_icon_position_press.png; sourceTree = "<group>"; };
 		6452A8781B567EB40029A60E /* wl_map_icon_position_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wl_map_icon_position_press@2x.png"; sourceTree = "<group>"; };
-		6452A8921B567EBE0029A60E /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		6452A8931B567EBE0029A60E /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		6452A8941B567EBE0029A60E /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
-		6452A8951B567EBE0029A60E /* QSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSearchViewController.h; sourceTree = "<group>"; };
-		6452A8961B567EBE0029A60E /* QSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSearchViewController.m; sourceTree = "<group>"; };
 		6452A89B1B567FC30029A60E /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		6452A89D1B567FCB0029A60E /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		6452A89F1B567FF60029A60E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -268,6 +264,13 @@
 		646582C11B53A55A00B61BEA /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		646582C51B53BAC700B61BEA /* BLEOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEOperation.h; sourceTree = "<group>"; };
 		646582C61B53BAC700B61BEA /* BLEOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEOperation.m; sourceTree = "<group>"; };
+		647C24011B5E8E4300040667 /* Routepolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Routepolyline.h; sourceTree = "<group>"; };
+		647C24021B5E8E4300040667 /* Routepolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Routepolyline.m; sourceTree = "<group>"; };
+		647C24031B5E8E4300040667 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		647C24041B5E8E4300040667 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		647C24051B5E8E4300040667 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		647C24061B5E8E4300040667 /* QSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSearchViewController.h; sourceTree = "<group>"; };
+		647C24071B5E8E4300040667 /* QSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,13 +402,13 @@
 			children = (
 				642AA48E1B4D635B002D255D /* CylinderBudgetChart */,
 				642AA4161B4D3330002D255D /* RESideMenuFunction */,
+				646582971B5396E600B61BEA /* FirstpageViewController.h */,
+				646582981B5396E600B61BEA /* FirstpageViewController.m */,
+				646582991B5396E600B61BEA /* FirstpageViewController.xib */,
 				642AA4251B4D3349002D255D /* DEMOLeftMenuViewController.h */,
 				642AA4261B4D3349002D255D /* DEMOLeftMenuViewController.m */,
 				642AA4271B4D3349002D255D /* DEMORightMenuViewController.h */,
 				642AA4281B4D3349002D255D /* DEMORightMenuViewController.m */,
-				646582971B5396E600B61BEA /* FirstpageViewController.h */,
-				646582981B5396E600B61BEA /* FirstpageViewController.m */,
-				646582991B5396E600B61BEA /* FirstpageViewController.xib */,
 				6465828A1B53937200B61BEA /* QRCodeViewController.h */,
 				6465828B1B53937200B61BEA /* QRCodeViewController.m */,
 				642AA4231B4D3349002D255D /* IndexViewController.h */,
@@ -416,11 +419,13 @@
 				642AA4291B4D3349002D255D /* RecordViewController.h */,
 				642AA42A1B4D3349002D255D /* RecordViewController.m */,
 				642AA4861B4D5EDC002D255D /* RecordViewController.xib */,
-				6452A8921B567EBE0029A60E /* MapViewController.h */,
-				6452A8931B567EBE0029A60E /* MapViewController.m */,
-				6452A8941B567EBE0029A60E /* MapViewController.xib */,
-				6452A8951B567EBE0029A60E /* QSearchViewController.h */,
-				6452A8961B567EBE0029A60E /* QSearchViewController.m */,
+				647C24011B5E8E4300040667 /* Routepolyline.h */,
+				647C24021B5E8E4300040667 /* Routepolyline.m */,
+				647C24031B5E8E4300040667 /* MapViewController.h */,
+				647C24041B5E8E4300040667 /* MapViewController.m */,
+				647C24051B5E8E4300040667 /* MapViewController.xib */,
+				647C24061B5E8E4300040667 /* QSearchViewController.h */,
+				647C24071B5E8E4300040667 /* QSearchViewController.m */,
 				642AA4911B4E0CA7002D255D /* HSDatePickerViewController */,
 				642AA43D1B4D3BE6002D255D /* BikefindViewController.h */,
 				642AA43E1B4D3BE6002D255D /* BikefindViewController.m */,
@@ -693,7 +698,7 @@
 				646582B31B539A1B00B61BEA /* 2.png in Resources */,
 				642AA3FC1B4D331C002D255D /* Main.storyboard in Resources */,
 				6452A87C1B567EB40029A60E /* anjuke_icon_to_position1.png in Resources */,
-				6452A8981B567EBE0029A60E /* MapViewController.xib in Resources */,
+				647C240A1B5E8E4300040667 /* MapViewController.xib in Resources */,
 				6452A87D1B567EB40029A60E /* anjuke_icon_to_position1@2x.png in Resources */,
 				6452A87B1B567EB40029A60E /* anjuke_icon_to_position.png in Resources */,
 				6452A8871B567EB40029A60E /* wl_map_icon_1@2x.png in Resources */,
@@ -749,9 +754,12 @@
 			files = (
 				642AA47A1B4D4A04002D255D /* UIAlertView+AFNetworking.m in Sources */,
 				642AA48D1B4D631D002D255D /* CBCCylinderBudgetChartView.m in Sources */,
+				647C240B1B5E8E4300040667 /* QSearchViewController.m in Sources */,
 				642AA47C1B4D4A04002D255D /* UIImageView+AFNetworking.m in Sources */,
 				642AA47B1B4D4A04002D255D /* UIButton+AFNetworking.m in Sources */,
 				642AA46F1B4D4A04002D255D /* AFHTTPRequestOperation.m in Sources */,
+				647C24081B5E8E4300040667 /* Routepolyline.m in Sources */,
+				647C24091B5E8E4300040667 /* MapViewController.m in Sources */,
 				646582A11B5399AB00B61BEA /* EAIntroPage.m in Sources */,
 				642AA4331B4D3349002D255D /* DEMOLeftMenuViewController.m in Sources */,
 				6404A0C01B52113D00077E0E /* DetailViewController.m in Sources */,
@@ -782,7 +790,6 @@
 				6452A8811B567EB40029A60E /* LocIsBaidu.m in Sources */,
 				6452A8851B567EB40029A60E /* RegionAnnotationView.m in Sources */,
 				646582BF1B53A30200B61BEA /* MBProgressHUD.m in Sources */,
-				6452A8991B567EBE0029A60E /* QSearchViewController.m in Sources */,
 				642AA4791B4D4A04002D255D /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				642AA47E1B4D4A04002D255D /* UIRefreshControl+AFNetworking.m in Sources */,
 				6452A8801B567EB40029A60E /* LocationChange.m in Sources */,
@@ -793,7 +800,6 @@
 				642AA4711B4D4A04002D255D /* AFHTTPSessionManager.m in Sources */,
 				642AA4421B4D3C29002D255D /* SettingViewController.m in Sources */,
 				642AA4991B4E155C002D255D /* Networkoperation.m in Sources */,
-				6452A8971B567EBE0029A60E /* MapViewController.m in Sources */,
 				642AA41F1B4D3330002D255D /* UIViewController+RESideMenu.m in Sources */,
 				646582A21B5399AB00B61BEA /* EAIntroView.m in Sources */,
 			);
