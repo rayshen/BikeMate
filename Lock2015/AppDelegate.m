@@ -11,13 +11,16 @@
 #import "DEMORightMenuViewController.h"
 #import "IndexViewController.h"
 
-#define peripheralUUID @"CE01C79E-B3BC-F8D9-DD85-ADFECAA7EA8A"
 #define UUIDKEY @"UUID"
+
 @interface AppDelegate ()
 
-@property BOOL isFirstusing;
-@property NSTimer *updatetimer;
-@property int sendindex;
+@property NSString* PhoneUUID;
+@property NSString* LockUUID;
+@property NSString* LockState;
+@property NSString* Batteryinfo;
+@property NSString* Ring;
+
 @end
 
 @implementation AppDelegate
@@ -25,18 +28,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //第一次用于生成手机的UUID，之后直接读取
+    [self uuid];
     
-    //看是否第一次登陆
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"Didused"]){
-        _isFirstusing=NO;
-    }else{
-        _isFirstusing=YES;
-    }
-    
-    if(_isFirstusing==YES){
+    //[CHKeychain deleteData:@"LOCKUUID"];
+    //看DIDUSED，是否第一次登陆
+    if(![CHKeychain load:@"LOCKUUID"]){
+        NSLog(@"未记录锁UUID");
         FirstpageViewController *FPVC=[[FirstpageViewController alloc]init];
         self.window.rootViewController = FPVC;
     }else{
+        _LockUUID=[CHKeychain load:@"LOCKUUID"];
+        NSLog(@"已记录锁UUID：%@",_LockUUID);
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[IndexViewController alloc] init]];
         DEMOLeftMenuViewController *leftMenuViewController = [[DEMOLeftMenuViewController alloc] init];
         DEMORightMenuViewController *rightMenuViewController = [[DEMORightMenuViewController alloc] init];
@@ -51,43 +54,37 @@
         sideMenuViewController.contentViewShadowRadius = 12;
         sideMenuViewController.contentViewShadowEnabled = YES;
         self.window.rootViewController = sideMenuViewController;
+        [self connectingDiscover];
     }
-    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [self connectingDiscover];
-    [self uuid];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Notifictiontodo:) name:@"LOCKCMD" object:nil];
+
     return YES;
 }
 
-
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 #pragma mark--获取设备UUID
 -(NSString*)uuid{
     if ([CHKeychain load:UUIDKEY]) {
         NSString *result = [CHKeychain load:UUIDKEY];
-        NSLog(@"已经存在UUID：%@",result);
+        _PhoneUUID=result;
+        NSLog(@"已存在手机UUID：%@",result);
         return result;
     }
     else
@@ -98,7 +95,8 @@
         CFRelease(puuid);
         CFRelease(uuidString);
         [CHKeychain save:UUIDKEY data:result];
-        NSLog(@"初次创建UUID：%@",result);
+        NSLog(@"初次创建手机UUID：%@",result);
+        _PhoneUUID=result;
         return result;
     }
     return nil;
@@ -118,8 +116,24 @@
 #pragma alertview delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag==2&&buttonIndex==1) {
+        HUD = [[MBProgressHUD alloc] initWithView:self.window];
+        [self.window addSubview:HUD];
+        HUD.delegate = self;
+        HUD.labelText = @"连接蓝牙中";
+        [HUD show:YES];
         [_centralMgr connectPeripheral:_discoveredPeripheral options:nil];
+
     }
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    NSLog(@"loading over");
+    [HUD removeFromSuperview];
+    HUD = nil;
 }
 
 //蓝牙状态delegate
@@ -133,8 +147,13 @@
             break;
         default:
             NSLog(@"蓝牙状态改变");
-            NSDictionary *dictionary = [NSDictionary dictionaryWithObject:@"未连接" forKey:@"State"];
-            [self notifiction:dictionary forname:@"APPDelegate"];
+            NSDictionary *dic = @{
+                                  @"ConnectState":@"NO",
+                                  @"LockState":@"",
+                                  @"Batteryinfo":@"",
+                                  @"Ring":@""
+                                  };
+            [self notifiction:dic forname:@"APPDelegate"];
             break;
     }
 }
@@ -148,7 +167,6 @@
     
     // update tableview
     [self saveBLE:discoveredBLEInfo];
-    
 }
 
 //保存设备信息
@@ -161,15 +179,16 @@
             return NO;
         }
     }
-    if ([discoveredBLEInfo.discoveredPeripheral.identifier.UUIDString isEqualToString:peripheralUUID])
+    if ([discoveredBLEInfo.discoveredPeripheral.identifier.UUIDString isEqualToString:[CHKeychain load:@"LOCKUUID"]])
     {
-        NSLog(@"correct product,connectPeripheral");
+        NSLog(@"发现配对的锁");
         _discoveredPeripheral=discoveredBLEInfo.discoveredPeripheral;
+        
         [self alertConnetionTips];
     }
 
-    NSLog(@"\n发现新的蓝牙设备!\n");
-    NSLog(@"BLEInfo\n UUID：%@\n RSSI:%@\n\n",discoveredBLEInfo.discoveredPeripheral.identifier.UUIDString,discoveredBLEInfo.rssi);
+    //NSLog(@"\n发现新的蓝牙设备!\n");
+    //NSLog(@"BLEInfo\n UUID：%@\n RSSI:%@\n\n",discoveredBLEInfo.discoveredPeripheral.identifier.UUIDString,discoveredBLEInfo.rssi);
     
     //保存devices到self.arrayBLE
     [self.arrayBLE addObject:discoveredBLEInfo];
@@ -179,19 +198,20 @@
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     NSLog(@"didFailToConnectPeripheral : %@", error.localizedDescription);
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObject:@"未连接" forKey:@"State"];
-    [self notifiction:dictionary forname:@"APPDelegate"];
+    NSDictionary *dic = @{
+                          @"ConnectState":@"NO",
+                          @"LockState":@"",
+                          @"Batteryinfo":@"",
+                          @"Ring":@""
+                          };
+    [self notifiction:dic forname:@"APPDelegate"];
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     NSLog(@"已经连接设备");
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObject:@"已连接" forKey:@"State"];
-    [self notifiction:dictionary forname:@"APPDelegate"];
-    
     [self.arrayServices removeAllObjects];
     [_discoveredPeripheral setDelegate:self];
-    //查找服务
     [_discoveredPeripheral discoverServices:nil];
 }
 
@@ -209,7 +229,6 @@
         //NSLog(@"Service found with UUID : %@", s.UUID);
         //搜索该service里的character
         [s.peripheral discoverCharacteristics:nil forService:s];
-        
         //保存services到self.arrayServices
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:@{@"ServiceDescription":s.UUID.description}];
         [self.arrayServices addObject:dic];
@@ -232,25 +251,16 @@
          if([c.UUID isEqual:[CBUUID UUIDWithString:@"FFE9"]]){
              _writeCharacteristic = c;
              NSLog(@"找到Write Characteristic : %@", c.UUID);
-             //[self performSelector:@selector(settimer) withObject:nil afterDelay:5];
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:newuser:%@\r\n",_PhoneUUID]];
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:newuser:%@\r\n",_PhoneUUID]];
          }
          
          //FFF6特征：广播
          if([c.UUID isEqual:[CBUUID UUIDWithString:@"FFE4"]]){
              NSLog(@"找到notify Characteristic : %@", c.UUID);
-             //[_discoveredPeripheral setNotifyValue:YES forCharacteristic:c];
+             [_discoveredPeripheral setNotifyValue:YES forCharacteristic:c];
          }
      }
-}
-
--(void)settimer{
-    //self.updatetimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(todisplaydata) userInfo:nil repeats:YES];
-}
-
-
--(void)todisplaydata{
-    _sendindex++;
-    [self writeToPeripheral:[NSString stringWithFormat:@"HELLO_%d\r\n",_sendindex]];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
@@ -260,7 +270,35 @@
         NSLog(@"didUpdateValueForCharacteristic error : %@", error.localizedDescription);
         return;
     }
-    NSLog(@"Notify:this Character with UUID %@ value is:%@",characteristic.UUID,characteristic.value);
+    //NSLog(@"Notify:this Character with UUID %@ value is:%@",characteristic.UUID,characteristic.value);
+    NSString *getvalue=[[NSString alloc]initWithData:characteristic.value encoding:NSASCIIStringEncoding];
+    NSLog(@"Notify Value is %@",getvalue);
+    
+    NSDictionary *dic = @{
+                          @"ConnectState":@"YES",
+                          @"LockState":_LockState?_LockState:@"",
+                          @"Batteryinfo":_Batteryinfo?_Batteryinfo:@"",
+                          @"Ring":_Ring?_Ring:@""
+                          };
+    [self notifiction:dic forname:@"APPDelegate"];
+    [HUD hide:YES];
+
+    /*
+    NSArray *list=[getvalue componentsSeparatedByString:@":"];
+    NSString *flag=list[0];
+    NSString *cmd=list[1];
+    NSString *cmdvalue=list[2];
+    if ([flag isEqualToString:@"dong14"]) {
+        if ([cmd isEqualToString:@""]) {
+            
+        }
+        if ([cmd isEqualToString:@""]) {
+            
+        }
+        if ([cmd isEqualToString:@""]) {
+            
+        }
+    }*/
 }
 
 
@@ -282,59 +320,33 @@
     NSLog(@"write value success : %@", characteristic);
 }
 
--(NSData*)stringToByte:(NSString*)string
-{
-    NSString *hexString=[[string uppercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if ([hexString length]%2!=0) {
-        return nil;
-    }
-    Byte tempbyt[1]={0};
-    NSMutableData* bytes=[NSMutableData data];
-    for(int i=0;i<[hexString length];i++)
-    {
-        unichar hex_char1 = [hexString characterAtIndex:i]; ////两位16进制数中的第一位(高位*16)
-        int int_ch1;
-        if(hex_char1 >= '0' && hex_char1 <='9')
-            int_ch1 = (hex_char1-48)*16;   //// 0 的Ascll - 48
-        else if(hex_char1 >= 'A' && hex_char1 <='F')
-            int_ch1 = (hex_char1-55)*16; //// A 的Ascll - 65
-        else
-            return nil;
-        i++;
-        
-        unichar hex_char2 = [hexString characterAtIndex:i]; ///两位16进制数中的第二位(低位)
-        int int_ch2;
-        if(hex_char2 >= '0' && hex_char2 <='9')
-            int_ch2 = (hex_char2-48); //// 0 的Ascll - 48
-        else if(hex_char2 >= 'A' && hex_char2 <='F')
-            int_ch2 = hex_char2-55; //// A 的Ascll - 65
-        else
-            return nil;
-        
-        tempbyt[0] = int_ch1+int_ch2;  ///将转化后的数放入Byte数组里
-        [bytes appendBytes:tempbyt length:1];
-    }
-    return bytes;
-}
-
-//将传入的NSData类型转换成NSString并返回
-- (NSString*)hexadecimalString:(NSData *)data{
-    NSString* result;
-    const unsigned char* dataBuffer = (const unsigned char*)[data bytes];
-    if(!dataBuffer){
-        return nil;
-    }
-    NSUInteger dataLength = [data length];
-    NSMutableString* hexString = [NSMutableString stringWithCapacity:(dataLength * 2)];
-    for(int i = 0; i < dataLength; i++){
-        [hexString appendString:[NSString stringWithFormat:@"%02lx", (unsigned long)dataBuffer[i]]];
-    }
-    result = [NSString stringWithString:hexString];
-    return result;
-}
-
-
 -(void)notifiction:(NSDictionary *)dic forname:(NSString *)name{
+    NSLog(@"发送通知");
     [[NSNotificationCenter defaultCenter] postNotificationName:name object:self userInfo:dic];
+}
+
+-(void)Notifictiontodo:(NSNotification*)notification
+{
+    NSLog(@"接收到通知:%@",[notification userInfo]);
+    NSString *Operation;
+    if([[notification userInfo] objectForKey:@"LOCKUUID"]){
+        _LockUUID=[[notification userInfo] objectForKey:@"LOCKUUID"];
+        NSLog(@"收到锁的信息:%@",_LockUUID);
+    }
+    if ([[notification userInfo] objectForKey:@"Operation"]) {
+        Operation=[[notification userInfo] objectForKey:@"Operation"];
+        if([Operation isEqualToString:@"CONNECT"]){
+            [self connectingDiscover];
+            NSLog(@"收到连接指令");
+        }
+        if([Operation isEqualToString:@"OPEN"]){
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:open:%@\r\n",_PhoneUUID]];
+            NSLog(@"收到开锁指令");
+        }
+        if([Operation isEqualToString:@"CLOSE"]){
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:close:%@\r\n",_PhoneUUID]];
+            NSLog(@"收到关锁指令");
+        }
+    }
 }
 @end

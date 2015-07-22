@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6404A0BA1B52111E00077E0E /* BLEInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6404A0B91B52111E00077E0E /* BLEInfo.m */; };
-		6404A0BF1B52113D00077E0E /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6404A0BC1B52113D00077E0E /* RootTableViewController.m */; };
-		6404A0C01B52113D00077E0E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6404A0BE1B52113D00077E0E /* DetailViewController.m */; };
 		6405A5541B5F5D9E00BF84D1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6405A5531B5F5D9E00BF84D1 /* Security.framework */; };
 		6405A5631B5FA80500BF84D1 /* CHKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6405A5621B5FA80500BF84D1 /* CHKeychain.m */; };
 		6405A5651B5FAB9F00BF84D1 /* KeychainAccessGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6405A5641B5FAB9F00BF84D1 /* KeychainAccessGroups.plist */; };
@@ -111,10 +109,6 @@
 /* Begin PBXFileReference section */
 		6404A0B81B52111E00077E0E /* BLEInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEInfo.h; sourceTree = "<group>"; };
 		6404A0B91B52111E00077E0E /* BLEInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEInfo.m; sourceTree = "<group>"; };
-		6404A0BB1B52113D00077E0E /* RootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
-		6404A0BC1B52113D00077E0E /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
-		6404A0BD1B52113D00077E0E /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		6404A0BE1B52113D00077E0E /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		6405A5531B5F5D9E00BF84D1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6405A5611B5FA80500BF84D1 /* CHKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHKeychain.h; sourceTree = "<group>"; };
 		6405A5621B5FA80500BF84D1 /* CHKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHKeychain.m; sourceTree = "<group>"; };
@@ -289,10 +283,6 @@
 			children = (
 				6404A0B81B52111E00077E0E /* BLEInfo.h */,
 				6404A0B91B52111E00077E0E /* BLEInfo.m */,
-				6404A0BB1B52113D00077E0E /* RootTableViewController.h */,
-				6404A0BC1B52113D00077E0E /* RootTableViewController.m */,
-				6404A0BD1B52113D00077E0E /* DetailViewController.h */,
-				6404A0BE1B52113D00077E0E /* DetailViewController.m */,
 			);
 			name = BLEConnection;
 			sourceTree = "<group>";
@@ -720,7 +710,6 @@
 				647C24091B5E8E4300040667 /* MapViewController.m in Sources */,
 				646582A11B5399AB00B61BEA /* EAIntroPage.m in Sources */,
 				642AA4331B4D3349002D255D /* DEMOLeftMenuViewController.m in Sources */,
-				6404A0C01B52113D00077E0E /* DetailViewController.m in Sources */,
 				642AA4321B4D3349002D255D /* IndexViewController.m in Sources */,
 				642AA4771B4D4A04002D255D /* AFURLSessionManager.m in Sources */,
 				642AA4781B4D4A04002D255D /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -731,7 +720,6 @@
 				642AA4721B4D4A04002D255D /* AFNetworkReachabilityManager.m in Sources */,
 				642AA4951B4E0CA7002D255D /* HSDatePickerViewController.m in Sources */,
 				6452A87F1B567EB40029A60E /* CheckInstalledMapAPP.m in Sources */,
-				6404A0BF1B52113D00077E0E /* RootTableViewController.m in Sources */,
 				642AA3F31B4D331C002D255D /* main.m in Sources */,
 				642AA4341B4D3349002D255D /* DEMORightMenuViewController.m in Sources */,
 				642AA4731B4D4A04002D255D /* AFSecurityPolicy.m in Sources */,

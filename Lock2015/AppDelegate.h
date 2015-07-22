@@ -12,9 +12,13 @@
 #import "QRCodeViewController.h"
 #import "BLEInfo.h"
 #import "CHKeychain.h"
+#import "QRCodeViewController.h"
+#import "MBProgressHUD.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate,RESideMenuDelegate,CBPeripheralManagerDelegate,
 CBCentralManagerDelegate,
-CBPeripheralDelegate,UIAlertViewDelegate>{
+CBPeripheralDelegate,UIAlertViewDelegate,MBProgressHUDDelegate>{
+    MBProgressHUD *HUD;
 }
 @property (strong, nonatomic) UIWindow *window;
 

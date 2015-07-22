@@ -22,10 +22,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self setLockState:@"NO"];
+
     //假如需要导航条
-    [self firstusingtest];
-    [self connectingtest];
+    //[self firstusingtest];
 	self.title = @"首页";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left"
                                                                              style:UIBarButtonItemStylePlain
@@ -37,7 +37,6 @@
                                                                             action:@selector(presentRightMenuViewController:)];
     
         
-    //判断连接状态
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -63,32 +62,14 @@
     [_chart reloadData];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBLEstate:) name:@"APPDelegate" object:nil];
-
-    if(_isConnected==YES){
-        [_connectingstatelabel setText:@"已连接"];
-        [_connectingstatelabel setTextColor:[UIColor greenColor]];
-           }else{
-        [_connectingstatelabel setText:@"未连接"];
-        [_connectingstatelabel setTextColor:[UIColor redColor]];
-    }
-    
 }
 
 -(void)changeBLEstate:(NSNotification*)notification
 {
-    NSString *state = [[notification userInfo] objectForKey:@"State"];
+    NSLog(@"%@",[notification userInfo]);
+    NSString *state = [[notification userInfo] objectForKey:@"ConnectState"];
     NSLog(@"接收到通知:%@",state);
-    if ([state isEqualToString:@"已连接"]) {
-        _isConnected=YES;
-        [_connectingstatelabel setText:@"已连接"];
-        [_connectingstatelabel setTextColor:[UIColor greenColor]];
-    }
-    
-    if ([state isEqualToString:@"未连接"]) {
-        _isConnected=NO;
-        [_connectingstatelabel setText:@"未连接"];
-        [_connectingstatelabel setTextColor:[UIColor redColor]];
-    }
+    [self setLockState:state];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -102,6 +83,21 @@
     [super viewWillDisappear:animated];
 }
 
+
+-(void)setLockState:(NSString *)string{
+    if ([string isEqualToString:@"YES"]) {
+        _isConnected=YES;
+        [_connectingstatelabel setText:@"已连接"];
+        [_connectingstatelabel setTextColor:[UIColor greenColor]];
+    }
+    
+    if ([string isEqualToString:@"NO"]) {
+        _isConnected=NO;
+        [_connectingstatelabel setText:@"未连接"];
+        [_connectingstatelabel setTextColor:[UIColor redColor]];
+    }
+}
+
 /****************函数区域****************/
 -(void)firstusingtest{
     if(_isFirstusing==YES){
@@ -111,51 +107,23 @@
     }
 }
 
--(void)connectingtest{
-    //_isConnected=NO;
-    
-}
-
-#pragma alertview delegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag==2&&buttonIndex==1) {
-        HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.view addSubview:HUD];
-        HUD.delegate = self;
-        HUD.labelText = @"连接蓝牙中";
-        [HUD showWhileExecuting:@selector(myTask) onTarget:self withObject:nil animated:YES];
-        }
-}
-
 -(void)lockbuttonclk:(id)sender{
     if (_isOnLock==YES) {
         _isOnLock=NO;
         [_lockbutton setImage:[UIImage imageNamed:@"unlock"] forState:UIControlStateNormal];
+        NSDictionary *dic = @{
+                              @"Operation":@"CLOSE",
+                              };
+        [self notifiction:dic forname:@"LOCKCMD"];
 
     }else{
         _isOnLock=YES;
         [_lockbutton setImage:[UIImage imageNamed:@"onlock"] forState:UIControlStateNormal];
+        NSDictionary *dic = @{
+                              @"Operation":@"OPEN",
+                              };
+        [self notifiction:dic forname:@"LOCKCMD"];
     }
-
-}
-
-- (void)myTask {
-    sleep(3);
-}
-#pragma mark -
-#pragma mark MBProgressHUDDelegate methods
-
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-    // Remove HUD from screen when the HUD was hidded
-    NSLog(@"loading over");
-    [HUD removeFromSuperview];
-    HUD = nil;
-    [self toconnect];
-}
-
--(void)toconnect{
-    [_connectingstatelabel setText:@"已连接"];
-    [_connectingstatelabel setTextColor:[UIColor greenColor]];
 }
 
 #pragma mark DataSource
@@ -233,5 +201,10 @@
 
 -(CGFloat)gradientAlpha:(CBCCylinderBudgetChartView*) chart {
     return 0.3;
+}
+
+-(void)notifiction:(NSDictionary *)dic forname:(NSString *)name{
+    NSLog(@"发送通知");
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:self userInfo:dic];
 }
 @end

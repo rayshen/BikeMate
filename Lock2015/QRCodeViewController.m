@@ -19,7 +19,7 @@
 
 @implementation QRCodeViewController
 
-NSString *DeviceMac;
+NSString *LOCKUUID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -135,15 +135,15 @@ NSString *DeviceMac;
         stringValue = metadataObject.stringValue;
     }
     
-    NSRange range = NSMakeRange(0, 4);
+    NSRange range = NSMakeRange(0, 6);
     NSString *mystring=[stringValue substringWithRange:range];
     
-    if([mystring isEqualToString:@"http"]){
+    if([mystring isEqualToString:@"DONG14"]){
         [_session stopRunning];
         [timer invalidate];
         NSLog(@"stringValue is:%@",stringValue);
-        NSRange range2 = NSMakeRange(4, 5);
-        // DeviceMac=[stringValue substringWithRange:range2];
+        NSRange range2 = NSMakeRange(7, 36);
+        LOCKUUID=[[NSString alloc] initWithFormat:@"%@",[stringValue substringWithRange:range2]];
         [self toBind];
     }else{
         labIntroudction.text=@"请扫描产品上的二维码进行绑定，其他的二维码是无效的哦~";
@@ -160,7 +160,12 @@ NSString *DeviceMac;
 }
 
 - (void)myTask {
-    sleep(3);
+    [CHKeychain save:@"LOCKUUID" data:LOCKUUID];
+    NSDictionary *dic = @{
+                          @"Operation":@"CONNECT",
+                          @"LOCKUUID":LOCKUUID,
+                          };
+    [self notifiction:dic forname:@"LOCKCMD"];
 }
 
 -(void)toindex{
@@ -176,18 +181,12 @@ NSString *DeviceMac;
                                                                    rightMenuViewController:rightMenuViewController];
     sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
     sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
-    //sideMenuViewController.delegate = self;
     sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
     sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
     sideMenuViewController.contentViewShadowOpacity = 0.6;
     sideMenuViewController.contentViewShadowRadius = 12;
     sideMenuViewController.contentViewShadowEnabled = YES;    
-    [self presentViewController:sideMenuViewController animated:YES completion:^{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setBool:YES forKey:@"Didused"];
-        [defaults setValue:DeviceMac forKey:@"DeviceMac"];
-        [defaults synchronize];//这句话的意义在于写入硬盘，必须。
-    }];
+    [self presentViewController:sideMenuViewController animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -205,6 +204,11 @@ NSString *DeviceMac;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)notifiction:(NSDictionary *)dic forname:(NSString *)name{
+    NSLog(@"发送通知");
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:self userInfo:dic];
 }
 
 @end

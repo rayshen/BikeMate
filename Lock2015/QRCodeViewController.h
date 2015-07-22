@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MBProgressHUD.h"
 #import "RESideMenu.h"
-
+#import "CHKeychain.h"
 @interface QRCodeViewController : UIViewController<AVCaptureMetadataOutputObjectsDelegate,MBProgressHUDDelegate>
 {
     int num;
@@ -20,6 +20,7 @@
     long long expectedLength;
     long long currentLength;
 }
+
 @property (strong,nonatomic)AVCaptureDevice * device;
 @property (strong,nonatomic)AVCaptureDeviceInput * input;
 @property (strong,nonatomic)AVCaptureMetadataOutput * output;
