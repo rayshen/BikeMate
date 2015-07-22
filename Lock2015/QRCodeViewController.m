@@ -142,8 +142,8 @@ NSString *DeviceMac;
         [_session stopRunning];
         [timer invalidate];
         NSLog(@"stringValue is:%@",stringValue);
-        NSRange range2 = NSMakeRange(4, 20);
-        DeviceMac=[stringValue substringWithRange:range2];
+        NSRange range2 = NSMakeRange(4, 5);
+        // DeviceMac=[stringValue substringWithRange:range2];
         [self toBind];
     }else{
         labIntroudction.text=@"请扫描产品上的二维码进行绑定，其他的二维码是无效的哦~";

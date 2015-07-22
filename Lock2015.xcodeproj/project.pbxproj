@@ -10,12 +10,14 @@
 		6404A0BA1B52111E00077E0E /* BLEInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6404A0B91B52111E00077E0E /* BLEInfo.m */; };
 		6404A0BF1B52113D00077E0E /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6404A0BC1B52113D00077E0E /* RootTableViewController.m */; };
 		6404A0C01B52113D00077E0E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6404A0BE1B52113D00077E0E /* DetailViewController.m */; };
+		6405A5541B5F5D9E00BF84D1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6405A5531B5F5D9E00BF84D1 /* Security.framework */; };
+		6405A5631B5FA80500BF84D1 /* CHKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6405A5621B5FA80500BF84D1 /* CHKeychain.m */; };
+		6405A5651B5FAB9F00BF84D1 /* KeychainAccessGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6405A5641B5FAB9F00BF84D1 /* KeychainAccessGroups.plist */; };
 		642AA3F31B4D331C002D255D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3F21B4D331C002D255D /* main.m */; };
 		642AA3F61B4D331C002D255D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3F51B4D331C002D255D /* AppDelegate.m */; };
 		642AA3FC1B4D331C002D255D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 642AA3FA1B4D331C002D255D /* Main.storyboard */; };
 		642AA3FE1B4D331C002D255D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 642AA3FD1B4D331C002D255D /* Images.xcassets */; };
 		642AA4011B4D331C002D255D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 642AA3FF1B4D331C002D255D /* LaunchScreen.xib */; };
-		642AA40D1B4D331C002D255D /* Lock2015Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA40C1B4D331C002D255D /* Lock2015Tests.m */; };
 		642AA41D1B4D3330002D255D /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA4181B4D3330002D255D /* RECommonFunctions.m */; };
 		642AA41E1B4D3330002D255D /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA41A1B4D3330002D255D /* RESideMenu.m */; };
 		642AA41F1B4D3330002D255D /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 642AA41C1B4D3330002D255D /* UIViewController+RESideMenu.m */; };
@@ -100,22 +102,11 @@
 		646582BF1B53A30200B61BEA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 646582BE1B53A30200B61BEA /* MBProgressHUD.m */; };
 		646582C21B53A55A00B61BEA /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 646582C01B53A55A00B61BEA /* 37x-Checkmark.png */; };
 		646582C31B53A55A00B61BEA /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 646582C11B53A55A00B61BEA /* 37x-Checkmark@2x.png */; };
-		646582C71B53BAC700B61BEA /* BLEOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 646582C61B53BAC700B61BEA /* BLEOperation.m */; };
 		647C24081B5E8E4300040667 /* Routepolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C24021B5E8E4300040667 /* Routepolyline.m */; };
 		647C24091B5E8E4300040667 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C24041B5E8E4300040667 /* MapViewController.m */; };
 		647C240A1B5E8E4300040667 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 647C24051B5E8E4300040667 /* MapViewController.xib */; };
 		647C240B1B5E8E4300040667 /* QSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C24071B5E8E4300040667 /* QSearchViewController.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		642AA4071B4D331C002D255D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 642AA3E51B4D331C002D255D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 642AA3EC1B4D331C002D255D;
-			remoteInfo = Lock2015;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6404A0B81B52111E00077E0E /* BLEInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEInfo.h; sourceTree = "<group>"; };
@@ -124,6 +115,10 @@
 		6404A0BC1B52113D00077E0E /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
 		6404A0BD1B52113D00077E0E /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		6404A0BE1B52113D00077E0E /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		6405A5531B5F5D9E00BF84D1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6405A5611B5FA80500BF84D1 /* CHKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHKeychain.h; sourceTree = "<group>"; };
+		6405A5621B5FA80500BF84D1 /* CHKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHKeychain.m; sourceTree = "<group>"; };
+		6405A5641B5FAB9F00BF84D1 /* KeychainAccessGroups.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = KeychainAccessGroups.plist; sourceTree = "<group>"; };
 		642AA3ED1B4D331C002D255D /* Lock2015.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lock2015.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		642AA3F11B4D331C002D255D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		642AA3F21B4D331C002D255D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -132,7 +127,6 @@
 		642AA3FB1B4D331C002D255D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		642AA3FD1B4D331C002D255D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		642AA4001B4D331C002D255D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		642AA4061B4D331C002D255D /* Lock2015Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Lock2015Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		642AA40B1B4D331C002D255D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		642AA40C1B4D331C002D255D /* Lock2015Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Lock2015Tests.m; sourceTree = "<group>"; };
 		642AA4171B4D3330002D255D /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
@@ -262,8 +256,6 @@
 		646582BE1B53A30200B61BEA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		646582C01B53A55A00B61BEA /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		646582C11B53A55A00B61BEA /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
-		646582C51B53BAC700B61BEA /* BLEOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEOperation.h; sourceTree = "<group>"; };
-		646582C61B53BAC700B61BEA /* BLEOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEOperation.m; sourceTree = "<group>"; };
 		647C24011B5E8E4300040667 /* Routepolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Routepolyline.h; sourceTree = "<group>"; };
 		647C24021B5E8E4300040667 /* Routepolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Routepolyline.m; sourceTree = "<group>"; };
 		647C24031B5E8E4300040667 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
@@ -278,6 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6405A5541B5F5D9E00BF84D1 /* Security.framework in Frameworks */,
 				6452A8A81B5680420029A60E /* UIKit.framework in Frameworks */,
 				6452A8A61B5680260029A60E /* Foundation.framework in Frameworks */,
 				6452A8A41B56801C0029A60E /* CoreLocation.framework in Frameworks */,
@@ -288,21 +281,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		642AA4031B4D331C002D255D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		6404A0B71B52110200077E0E /* BLEConnection */ = {
 			isa = PBXGroup;
 			children = (
-				646582C51B53BAC700B61BEA /* BLEOperation.h */,
-				646582C61B53BAC700B61BEA /* BLEOperation.m */,
 				6404A0B81B52111E00077E0E /* BLEInfo.h */,
 				6404A0B91B52111E00077E0E /* BLEInfo.m */,
 				6404A0BB1B52113D00077E0E /* RootTableViewController.h */,
@@ -316,6 +300,7 @@
 		642AA3E41B4D331C002D255D = {
 			isa = PBXGroup;
 			children = (
+				6405A5531B5F5D9E00BF84D1 /* Security.framework */,
 				6452A8A71B5680420029A60E /* UIKit.framework */,
 				6452A8A51B5680260029A60E /* Foundation.framework */,
 				6452A8A31B56801C0029A60E /* CoreLocation.framework */,
@@ -333,7 +318,6 @@
 			isa = PBXGroup;
 			children = (
 				642AA3ED1B4D331C002D255D /* Lock2015.app */,
-				642AA4061B4D331C002D255D /* Lock2015Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -346,12 +330,14 @@
 				642AA3FD1B4D331C002D255D /* Images.xcassets */,
 				642AA3F41B4D331C002D255D /* AppDelegate.h */,
 				642AA3F51B4D331C002D255D /* AppDelegate.m */,
+				6405A5611B5FA80500BF84D1 /* CHKeychain.h */,
+				6405A5621B5FA80500BF84D1 /* CHKeychain.m */,
+				6404A0B71B52110200077E0E /* BLEConnection */,
+				642AA4481B4D4A04002D255D /* NetworkConnnection */,
 				646582A61B539A1B00B61BEA /* Resources */,
 				6465829C1B5399AB00B61BEA /* EAIntroView */,
 				646582C41B53AA2300B61BEA /* MBProgressHUD */,
 				642AA4201B4D3349002D255D /* Controllers */,
-				6404A0B71B52110200077E0E /* BLEConnection */,
-				642AA4481B4D4A04002D255D /* NetworkConnnection */,
 				642AA3F01B4D331C002D255D /* Supporting Files */,
 			);
 			path = Lock2015;
@@ -362,6 +348,7 @@
 			children = (
 				642AA3F11B4D331C002D255D /* Info.plist */,
 				642AA3F21B4D331C002D255D /* main.m */,
+				6405A5641B5FAB9F00BF84D1 /* KeychainAccessGroups.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -635,24 +622,6 @@
 			productReference = 642AA3ED1B4D331C002D255D /* Lock2015.app */;
 			productType = "com.apple.product-type.application";
 		};
-		642AA4051B4D331C002D255D /* Lock2015Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 642AA4131B4D331C002D255D /* Build configuration list for PBXNativeTarget "Lock2015Tests" */;
-			buildPhases = (
-				642AA4021B4D331C002D255D /* Sources */,
-				642AA4031B4D331C002D255D /* Frameworks */,
-				642AA4041B4D331C002D255D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				642AA4081B4D331C002D255D /* PBXTargetDependency */,
-			);
-			name = Lock2015Tests;
-			productName = Lock2015Tests;
-			productReference = 642AA4061B4D331C002D255D /* Lock2015Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -664,10 +633,6 @@
 				TargetAttributes = {
 					642AA3EC1B4D331C002D255D = {
 						CreatedOnToolsVersion = 6.4;
-					};
-					642AA4051B4D331C002D255D = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 642AA3EC1B4D331C002D255D;
 					};
 				};
 			};
@@ -685,7 +650,6 @@
 			projectRoot = "";
 			targets = (
 				642AA3EC1B4D331C002D255D /* Lock2015 */,
-				642AA4051B4D331C002D255D /* Lock2015Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -698,6 +662,7 @@
 				646582B31B539A1B00B61BEA /* 2.png in Resources */,
 				642AA3FC1B4D331C002D255D /* Main.storyboard in Resources */,
 				6452A87C1B567EB40029A60E /* anjuke_icon_to_position1.png in Resources */,
+				6405A5651B5FAB9F00BF84D1 /* KeychainAccessGroups.plist in Resources */,
 				647C240A1B5E8E4300040667 /* MapViewController.xib in Resources */,
 				6452A87D1B567EB40029A60E /* anjuke_icon_to_position1@2x.png in Resources */,
 				6452A87B1B567EB40029A60E /* anjuke_icon_to_position.png in Resources */,
@@ -738,13 +703,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		642AA4041B4D331C002D255D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -781,7 +739,6 @@
 				642AA4351B4D3349002D255D /* RecordViewController.m in Sources */,
 				642AA4751B4D4A04002D255D /* AFURLRequestSerialization.m in Sources */,
 				6465828C1B53937200B61BEA /* QRCodeViewController.m in Sources */,
-				646582C71B53BAC700B61BEA /* BLEOperation.m in Sources */,
 				6465829A1B5396E600B61BEA /* FirstpageViewController.m in Sources */,
 				642AA41E1B4D3330002D255D /* RESideMenu.m in Sources */,
 				642AA4761B4D4A04002D255D /* AFURLResponseSerialization.m in Sources */,
@@ -799,29 +756,14 @@
 				642AA47F1B4D4A04002D255D /* UIWebView+AFNetworking.m in Sources */,
 				642AA4711B4D4A04002D255D /* AFHTTPSessionManager.m in Sources */,
 				642AA4421B4D3C29002D255D /* SettingViewController.m in Sources */,
+				6405A5631B5FA80500BF84D1 /* CHKeychain.m in Sources */,
 				642AA4991B4E155C002D255D /* Networkoperation.m in Sources */,
 				642AA41F1B4D3330002D255D /* UIViewController+RESideMenu.m in Sources */,
 				646582A21B5399AB00B61BEA /* EAIntroView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		642AA4021B4D331C002D255D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				642AA40D1B4D331C002D255D /* Lock2015Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		642AA4081B4D331C002D255D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 642AA3EC1B4D331C002D255D /* Lock2015 */;
-			targetProxy = 642AA4071B4D331C002D255D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		642AA3FA1B4D331C002D255D /* Main.storyboard */ = {
@@ -929,11 +871,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yu Wang (EET4GZ9XHH)";
 				INFOPLIST_FILE = Lock2015/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -942,46 +888,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yu Wang (EET4GZ9XHH)";
 				INFOPLIST_FILE = Lock2015/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64";
-			};
-			name = Release;
-		};
-		642AA4141B4D331C002D255D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Lock2015Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lock2015.app/Lock2015";
-			};
-			name = Debug;
-		};
-		642AA4151B4D331C002D255D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Lock2015Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lock2015.app/Lock2015";
 			};
 			name = Release;
 		};
@@ -1002,15 +918,6 @@
 			buildConfigurations = (
 				642AA4111B4D331C002D255D /* Debug */,
 				642AA4121B4D331C002D255D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		642AA4131B4D331C002D255D /* Build configuration list for PBXNativeTarget "Lock2015Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				642AA4141B4D331C002D255D /* Debug */,
-				642AA4151B4D331C002D255D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

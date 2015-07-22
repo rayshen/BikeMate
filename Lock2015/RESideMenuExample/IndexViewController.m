@@ -22,6 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     //假如需要导航条
     [self firstusingtest];
     [self connectingtest];
@@ -35,6 +36,7 @@
                                                                             target:self
                                                                             action:@selector(presentRightMenuViewController:)];
     
+        
     //判断连接状态
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -60,14 +62,32 @@
     _chart.dataSource = self;
     [_chart reloadData];
 
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBLEstate:) name:@"APPDelegate" object:nil];
+
     if(_isConnected==YES){
         [_connectingstatelabel setText:@"已连接"];
         [_connectingstatelabel setTextColor:[UIColor greenColor]];
            }else{
         [_connectingstatelabel setText:@"未连接"];
         [_connectingstatelabel setTextColor:[UIColor redColor]];
-        [self connectingDiscover];
+    }
+    
+}
+
+-(void)changeBLEstate:(NSNotification*)notification
+{
+    NSString *state = [[notification userInfo] objectForKey:@"State"];
+    NSLog(@"接收到通知:%@",state);
+    if ([state isEqualToString:@"已连接"]) {
+        _isConnected=YES;
+        [_connectingstatelabel setText:@"已连接"];
+        [_connectingstatelabel setTextColor:[UIColor greenColor]];
+    }
+    
+    if ([state isEqualToString:@"未连接"]) {
+        _isConnected=NO;
+        [_connectingstatelabel setText:@"未连接"];
+        [_connectingstatelabel setTextColor:[UIColor redColor]];
     }
 }
 
@@ -94,20 +114,6 @@
 -(void)connectingtest{
     //_isConnected=NO;
     
-}
-
-
--(void)connectingDiscover{
-    _DeviceisAround=YES;
-    if(_DeviceisAround==YES){
-        [self alertConnetionTips];
-    }
-}
-
--(void)alertConnetionTips{
-    UIAlertView *ConnetionTips=[[UIAlertView alloc] initWithTitle:@"提示" message:@"检测到您的周边" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"一键连接",nil];
-    ConnetionTips.tag=2;
-    [ConnetionTips show];
 }
 
 #pragma alertview delegate

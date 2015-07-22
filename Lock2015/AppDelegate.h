@@ -10,10 +10,23 @@
 #import "RESideMenu.h"
 #import "FirstpageViewController.h"
 #import "QRCodeViewController.h"
-@interface AppDelegate : UIResponder <UIApplicationDelegate,RESideMenuDelegate>
-
+#import "BLEInfo.h"
+#import "CHKeychain.h"
+@interface AppDelegate : UIResponder <UIApplicationDelegate,RESideMenuDelegate,CBPeripheralManagerDelegate,
+CBCentralManagerDelegate,
+CBPeripheralDelegate,UIAlertViewDelegate>{
+}
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic, strong) CBCentralManager *centralMgr;
+@property (nonatomic, strong) CBPeripheral *discoveredPeripheral;
+@property (nonatomic, strong) NSMutableArray *arrayBLE;
+@property (nonatomic, strong) CBService *thisService;
+@property (strong, nonatomic) CBCharacteristic* writeCharacteristic;
+// tableview sections，保存蓝牙设备里面的services字典，字典第一个为service，剩下是特性与值
+@property (nonatomic, strong) NSMutableArray *arrayServices;
+// 用来记录有多少特性，当全部特性保存完毕，刷新列表
+@property (atomic, assign) int characteristicNum;
 
 @end
 
