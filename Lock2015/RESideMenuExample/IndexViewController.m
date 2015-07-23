@@ -14,7 +14,7 @@
 
 @property BOOL isOnLock;
 @property BOOL DeviceisAround;
-
+@property UIAlertView *ConnetionTips;
 @end
 
 @implementation IndexViewController
@@ -22,10 +22,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setLockState:@"NO"];
+    if([AppDelegate getisConnect]==YES){
+        [self setConnectState:@"YES"];
+    }else{
+        [self setConnectState:@"NO"];
+    }
 
-    //假如需要导航条
-    //[self firstusingtest];
 	self.title = @"首页";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left"
                                                                              style:UIBarButtonItemStylePlain
@@ -44,11 +46,10 @@
     [self.view insertSubview:imageView atIndex:0];
     
     /**加锁解锁*/
-    _isOnLock=NO;
     [_sidebutton addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     [_setbutton addTarget:self action:@selector(presentRightMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     
-    if (_isOnLock==YES) {
+    if ([AppDelegate getisOnlock]==YES) {
         [_lockbutton setImage:[UIImage imageNamed:@"onlock"] forState:UIControlStateNormal];
     }else{
         [_lockbutton setImage:[UIImage imageNamed:@"unlock"] forState:UIControlStateNormal];
@@ -61,15 +62,19 @@
     _chart.dataSource = self;
     [_chart reloadData];
 
+    _ConnetionTips=[[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有连接蓝牙，现在进行搜索设备并连接吗？" delegate:self cancelButtonTitle:@"搜索" otherButtonTitles:nil];
+    _ConnetionTips.tag=2;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBLEstate:) name:@"APPDelegate" object:nil];
 }
 
 -(void)changeBLEstate:(NSNotification*)notification
 {
     NSLog(@"%@",[notification userInfo]);
-    NSString *state = [[notification userInfo] objectForKey:@"ConnectState"];
-    NSLog(@"接收到通知:%@",state);
-    [self setLockState:state];
+    if([[notification userInfo] objectForKey:@"ConnectState"]){
+        NSString *state=[[notification userInfo] objectForKey:@"ConnectState"];
+        [self setConnectState:state];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -84,46 +89,62 @@
 }
 
 
--(void)setLockState:(NSString *)string{
+-(void)setConnectState:(NSString *)string{
     if ([string isEqualToString:@"YES"]) {
-        _isConnected=YES;
         [_connectingstatelabel setText:@"已连接"];
         [_connectingstatelabel setTextColor:[UIColor greenColor]];
     }
     
     if ([string isEqualToString:@"NO"]) {
-        _isConnected=NO;
         [_connectingstatelabel setText:@"未连接"];
         [_connectingstatelabel setTextColor:[UIColor redColor]];
     }
 }
-
 /****************函数区域****************/
 -(void)firstusingtest{
-    if(_isFirstusing==YES){
+    //if(_isFirstusing==YES){
         UIAlertView *ConnetionTips=[[UIAlertView alloc] initWithTitle:@"绑定成功" message:@"请尽情享受您的骑车之旅吧~" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
         ConnetionTips.tag=1;
         [ConnetionTips show];
-    }
+    //}
 }
 
 -(void)lockbuttonclk:(id)sender{
-    if (_isOnLock==YES) {
-        _isOnLock=NO;
-        [_lockbutton setImage:[UIImage imageNamed:@"unlock"] forState:UIControlStateNormal];
-        NSDictionary *dic = @{
-                              @"Operation":@"CLOSE",
-                              };
-        [self notifiction:dic forname:@"LOCKCMD"];
-
+    //假如没有连接蓝牙
+    if ([AppDelegate getisConnect]==NO) {
+        [_ConnetionTips show];
     }else{
-        _isOnLock=YES;
-        [_lockbutton setImage:[UIImage imageNamed:@"onlock"] forState:UIControlStateNormal];
-        NSDictionary *dic = @{
-                              @"Operation":@"OPEN",
-                              };
-        [self notifiction:dic forname:@"LOCKCMD"];
+        if (_isOnLock==YES) {
+            _isOnLock=NO;
+            [_lockbutton setImage:[UIImage imageNamed:@"unlock"] forState:UIControlStateNormal];
+            NSDictionary *dic = @{
+                                  @"Operation":@"CLOSE",
+                                  };
+            [self notifiction:dic forname:@"LOCKCMD"];
+        }else{
+            _isOnLock=YES;
+            [_lockbutton setImage:[UIImage imageNamed:@"onlock"] forState:UIControlStateNormal];
+            NSDictionary *dic = @{
+                                  @"Operation":@"OPEN",
+                                  };
+            [self notifiction:dic forname:@"LOCKCMD"];
+        }
     }
+}
+
+#pragma alertview delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag==2&&buttonIndex==0) {
+        [self toSearchBLE];
+    }
+}
+
+-(void)toSearchBLE{
+    //需要连接蓝牙
+    NSDictionary *dic = @{
+                          @"Operation":@"SEARCH"
+                          };
+    [self notifiction:dic forname:@"LOCKCMD"];
 }
 
 #pragma mark DataSource

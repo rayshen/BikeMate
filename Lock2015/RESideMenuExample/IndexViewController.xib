@@ -20,10 +20,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gy8-RF-BjT">
-                    <rect key="frame" x="16" y="20" width="48" height="48"/>
+                    <rect key="frame" x="20" y="28" width="35" height="35"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="P4e-8E-7T6"/>
-                        <constraint firstAttribute="width" constant="48" id="mCq-p3-l2T"/>
+                        <constraint firstAttribute="height" constant="35" id="P4e-8E-7T6"/>
+                        <constraint firstAttribute="width" constant="35" id="mCq-p3-l2T"/>
                     </constraints>
                     <state key="normal" image="menuIcon">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,7 +71,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="WOv-xz-DnX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="33" id="1Si-0B-zHY"/>
-                <constraint firstItem="Gy8-RF-BjT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="67i-p8-vCT"/>
+                <constraint firstItem="Gy8-RF-BjT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="67i-p8-vCT"/>
                 <constraint firstAttribute="centerX" secondItem="ced-2d-tUv" secondAttribute="centerX" id="7N7-Xt-tBg"/>
                 <constraint firstItem="QXM-0T-7wP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Anl-Cj-E7w"/>
                 <constraint firstItem="YxQ-LU-Tv2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Ddh-Gu-4bI"/>
@@ -79,7 +79,7 @@
                 <constraint firstAttribute="centerY" secondItem="ced-2d-tUv" secondAttribute="centerY" id="Ujv-BY-zE5"/>
                 <constraint firstAttribute="bottom" secondItem="YxQ-LU-Tv2" secondAttribute="bottom" constant="20" id="VF7-ml-56F"/>
                 <constraint firstAttribute="bottom" secondItem="QXM-0T-7wP" secondAttribute="bottom" constant="20" id="heN-T6-aJk"/>
-                <constraint firstItem="Gy8-RF-BjT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="p0U-r4-7rd"/>
+                <constraint firstItem="Gy8-RF-BjT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="28" id="p0U-r4-7rd"/>
                 <constraint firstAttribute="trailing" secondItem="QXM-0T-7wP" secondAttribute="trailing" constant="16" id="vlQ-u2-H7p"/>
             </constraints>
             <variation key="default">

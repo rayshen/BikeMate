@@ -15,13 +15,13 @@
 #import "QRCodeViewController.h"
 #import "MBProgressHUD.h"
 
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate,RESideMenuDelegate,CBPeripheralManagerDelegate,
 CBCentralManagerDelegate,
 CBPeripheralDelegate,UIAlertViewDelegate,MBProgressHUDDelegate>{
     MBProgressHUD *HUD;
 }
 @property (strong, nonatomic) UIWindow *window;
-
 @property (nonatomic, strong) CBCentralManager *centralMgr;
 @property (nonatomic, strong) CBPeripheral *discoveredPeripheral;
 @property (nonatomic, strong) NSMutableArray *arrayBLE;
@@ -32,5 +32,7 @@ CBPeripheralDelegate,UIAlertViewDelegate,MBProgressHUDDelegate>{
 // 用来记录有多少特性，当全部特性保存完毕，刷新列表
 @property (atomic, assign) int characteristicNum;
 
++(BOOL)getisConnect;
++(BOOL)getisOnlock;
 @end
 

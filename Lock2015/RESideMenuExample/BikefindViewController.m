@@ -28,6 +28,8 @@
     imageView.image = [UIImage imageNamed:@"pic1"];
     [self.view insertSubview:imageView atIndex:0];
     
+    [_bgview setBackgroundColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:0.5]];
+    
     [self addges];
 }
 

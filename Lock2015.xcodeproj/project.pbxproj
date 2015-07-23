@@ -104,6 +104,8 @@
 		647C24091B5E8E4300040667 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C24041B5E8E4300040667 /* MapViewController.m */; };
 		647C240A1B5E8E4300040667 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 647C24051B5E8E4300040667 /* MapViewController.xib */; };
 		647C240B1B5E8E4300040667 /* QSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C24071B5E8E4300040667 /* QSearchViewController.m */; };
+		64982C4A1B613CBD0006F518 /* BikeRouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64982C481B613CBD0006F518 /* BikeRouteViewController.m */; };
+		64982C4B1B613CBD0006F518 /* BikeRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64982C491B613CBD0006F518 /* BikeRouteViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -257,6 +259,9 @@
 		647C24051B5E8E4300040667 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		647C24061B5E8E4300040667 /* QSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSearchViewController.h; sourceTree = "<group>"; };
 		647C24071B5E8E4300040667 /* QSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSearchViewController.m; sourceTree = "<group>"; };
+		64982C471B613CBD0006F518 /* BikeRouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BikeRouteViewController.h; sourceTree = "<group>"; };
+		64982C481B613CBD0006F518 /* BikeRouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BikeRouteViewController.m; sourceTree = "<group>"; };
+		64982C491B613CBD0006F518 /* BikeRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BikeRouteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -407,6 +412,9 @@
 				642AA43D1B4D3BE6002D255D /* BikefindViewController.h */,
 				642AA43E1B4D3BE6002D255D /* BikefindViewController.m */,
 				642AA48F1B4E0C4E002D255D /* BikefindViewController.xib */,
+				64982C471B613CBD0006F518 /* BikeRouteViewController.h */,
+				64982C481B613CBD0006F518 /* BikeRouteViewController.m */,
+				64982C491B613CBD0006F518 /* BikeRouteViewController.xib */,
 				642AA4401B4D3C29002D255D /* SettingViewController.h */,
 				642AA4411B4D3C29002D255D /* SettingViewController.m */,
 			);
@@ -680,6 +688,7 @@
 				642AA49B1B4E440C002D255D /* IndexViewController.xib in Resources */,
 				646582C31B53A55A00B61BEA /* 37x-Checkmark@2x.png in Resources */,
 				642AA3FE1B4D331C002D255D /* Images.xcassets in Resources */,
+				64982C4B1B613CBD0006F518 /* BikeRouteViewController.xib in Resources */,
 				6465829B1B5396E600B61BEA /* FirstpageViewController.xib in Resources */,
 				646582B21B539A1B00B61BEA /* 1.png in Resources */,
 				6465828F1B5393CD00B61BEA /* line@2x.png in Resources */,
@@ -713,6 +722,7 @@
 				642AA4321B4D3349002D255D /* IndexViewController.m in Sources */,
 				642AA4771B4D4A04002D255D /* AFURLSessionManager.m in Sources */,
 				642AA4781B4D4A04002D255D /* AFNetworkActivityIndicatorManager.m in Sources */,
+				64982C4A1B613CBD0006F518 /* BikeRouteViewController.m in Sources */,
 				642AA4741B4D4A04002D255D /* AFURLConnectionOperation.m in Sources */,
 				6452A8841B567EB40029A60E /* RegionAnnotation.m in Sources */,
 				642AA4701B4D4A04002D255D /* AFHTTPRequestOperationManager.m in Sources */,

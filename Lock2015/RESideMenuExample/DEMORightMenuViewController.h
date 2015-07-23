@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RESideMenu.h"
-
+#import "AppDelegate.h"
 @interface DEMORightMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

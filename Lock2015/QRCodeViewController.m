@@ -170,8 +170,6 @@ NSString *LOCKUUID;
 
 -(void)toindex{
     IndexViewController *indexVC=[[IndexViewController alloc]init];
-    indexVC.isFirstusing=YES;
-    indexVC.isConnected=YES;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:indexVC];
     DEMOLeftMenuViewController *leftMenuViewController = [[DEMOLeftMenuViewController alloc] init];
     DEMORightMenuViewController *rightMenuViewController = [[DEMORightMenuViewController alloc] init];

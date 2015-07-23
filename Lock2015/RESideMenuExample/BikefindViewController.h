@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSDate *selectedDate;
 @property (nonatomic, strong) NSDate *selectedDate2;
 - (IBAction)tofind:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *bgview;
 
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
 

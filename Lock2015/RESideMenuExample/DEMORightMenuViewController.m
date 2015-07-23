@@ -15,14 +15,17 @@
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property int sumitems;
+@property UIAlertView *ConnetionTips;
 @end
+
+UISwitch *switchview;
 
 @implementation DEMORightMenuViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _sumitems=3;
+    _sumitems=1;
     self.tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-220, (self.view.frame.size.height - 54 * _sumitems) / 2.0f, 220, 54 * _sumitems) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin;
@@ -36,8 +39,29 @@
         tableView;
     });
     [self.view addSubview:self.tableView];
+    _ConnetionTips=[[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有连接蓝牙，现在进行搜索设备并连接吗？" delegate:self cancelButtonTitle:@"搜索" otherButtonTitles:nil];
+    _ConnetionTips.tag=2;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBLEstate:) name:@"APPDelegate" object:nil];
 }
 
+-(void)changeBLEstate:(NSNotification*)notification
+{
+    NSLog(@"%@",[notification userInfo]);
+    if([[notification userInfo] objectForKey:@"ConnectState"]){
+        NSString *state=[[notification userInfo] objectForKey:@"ConnectState"];
+        [self setConnectState:state];
+    }
+}
+
+-(void)setConnectState:(NSString *)string{
+    if ([string isEqualToString:@"YES"]) {
+        switchview.userInteractionEnabled=YES;
+    }
+    
+    if ([string isEqualToString:@"NO"]) {
+        switchview.userInteractionEnabled=NO;
+    }
+}
 #pragma mark -
 #pragma mark UITableView Delegate
 
@@ -60,6 +84,26 @@
             break;
     }
     */
+    if([AppDelegate getisConnect]==YES){
+    
+    }else{
+        [_ConnetionTips show];
+    }
+}
+
+#pragma alertview delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag==2&&buttonIndex==0) {
+        [self toSearchBLE];
+    }
+}
+
+-(void)toSearchBLE{
+    //需要连接蓝牙
+    NSDictionary *dic = @{
+                          @"Operation":@"SEARCH"
+                          };
+    [self notifiction:dic forname:@"LOCKCMD"];
 }
 
 #pragma mark -
@@ -96,27 +140,49 @@
     }
     
     
-    NSArray *items =[[NSArray alloc] initWithObjects:@"靠近自动解锁",@"防盗鸣笛",@"摔倒通知亲友",nil];
+    NSArray *items =[[NSArray alloc] initWithObjects:@"防盗鸣笛",@"靠近自动解锁",@"摔倒通知亲友",nil];
     cell.textLabel.text = items[[indexPath row]];
     cell.textLabel.textAlignment = NSTextAlignmentRight;
 
     
-    UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
+    switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
     cell.accessoryView = switchview;
-    [switchview addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    [switchview addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventTouchUpInside];
     switchview.tag=[indexPath row];
+    if ([AppDelegate getisConnect]==YES) {
+        switchview.userInteractionEnabled=YES;
+    }else{
+        switchview.userInteractionEnabled=NO;
+
+    }
     return cell;
 }
 
 -(void)switchAction:(id)sender{
-    UISwitch *switchButton = (UISwitch*)sender;
-    BOOL isButtonOn = [switchButton isOn];
-    if (isButtonOn) {
-        NSLog(@"switchButton %i turn on",switchButton.tag);
-    }else {
-        NSLog(@"switchButton %i turn off",switchButton.tag);
-    }
-    
+        UISwitch *switchButton = (UISwitch*)sender;
+        BOOL isButtonOn = [switchButton isOn];
+        if (isButtonOn) {
+                NSLog(@"switchButton %li turn on",(long)switchButton.tag);
+                if ((long)switchButton.tag==0) {
+                    NSDictionary *dic = @{
+                                          @"Operation":@"RRNGON",
+                                          };
+                    [self notifiction:dic forname:@"LOCKCMD"];
+                }
+            
+        }else {
+            NSLog(@"switchButton %li turn off",(long)switchButton.tag);
+            if ((long)switchButton.tag==0) {
+                NSDictionary *dic = @{
+                                      @"Operation":@"RINGOFF",
+                                      };
+                [self notifiction:dic forname:@"LOCKCMD"];
+            }
+        }
 }
 
+-(void)notifiction:(NSDictionary *)dic forname:(NSString *)name{
+    NSLog(@"发送通知");
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:self userInfo:dic];
+}
 @end

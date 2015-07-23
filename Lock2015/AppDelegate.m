@@ -13,13 +13,18 @@
 
 #define UUIDKEY @"UUID"
 
-@interface AppDelegate ()
+static BOOL isAround;
+static BOOL isConnect;
+static BOOL isOnlock;
+static BOOL isRingon;
+static BOOL isAutoSearch;
 
-@property NSString* PhoneUUID;
-@property NSString* LockUUID;
-@property NSString* LockState;
-@property NSString* Batteryinfo;
-@property NSString* Ring;
+static NSString* PhoneUUID;
+static NSString* LockUUID;
+static NSString* Batteryinfo;
+
+
+@interface AppDelegate ()
 
 @end
 
@@ -27,6 +32,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    isConnect=NO;
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //第一次用于生成手机的UUID，之后直接读取
     [self uuid];
@@ -38,8 +45,8 @@
         FirstpageViewController *FPVC=[[FirstpageViewController alloc]init];
         self.window.rootViewController = FPVC;
     }else{
-        _LockUUID=[CHKeychain load:@"LOCKUUID"];
-        NSLog(@"已记录锁UUID：%@",_LockUUID);
+        LockUUID=[CHKeychain load:@"LOCKUUID"];
+        NSLog(@"已记录锁UUID：%@",LockUUID);
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[IndexViewController alloc] init]];
         DEMOLeftMenuViewController *leftMenuViewController = [[DEMOLeftMenuViewController alloc] init];
         DEMORightMenuViewController *rightMenuViewController = [[DEMORightMenuViewController alloc] init];
@@ -79,11 +86,23 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
 }
 
++(BOOL)getisConnect{
+    return isConnect;
+}
+
++(BOOL)getisOnlock{
+    return isOnlock;
+}
+
++(BOOL)getisRingon{
+    return isRingon;
+}
+
 #pragma mark--获取设备UUID
 -(NSString*)uuid{
     if ([CHKeychain load:UUIDKEY]) {
         NSString *result = [CHKeychain load:UUIDKEY];
-        _PhoneUUID=result;
+        PhoneUUID=result;
         NSLog(@"已存在手机UUID：%@",result);
         return result;
     }
@@ -96,22 +115,50 @@
         CFRelease(uuidString);
         [CHKeychain save:UUIDKEY data:result];
         NSLog(@"初次创建手机UUID：%@",result);
-        _PhoneUUID=result;
+        PhoneUUID=result;
         return result;
     }
     return nil;
 }
 
+#pragma mark--蓝牙连接函数
 -(void)connectingDiscover{
     self.centralMgr = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     self.arrayBLE = [[NSMutableArray alloc] init];
+    isAround=NO;
+
+}
+
+-(void)alertSearchview{
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(searchResult:) userInfo:nil repeats:NO];
+    HUD = [[MBProgressHUD alloc] initWithView:self.window];
+    [self.window addSubview:HUD];
+    HUD.delegate = self;
+    HUD.labelText = @"努力搜索蓝牙设备中";
+    [HUD show:YES];
+    [self connectingDiscover];
+}
+
+-(void)searchResult:(id)sender{
+    if (isAround==YES) {
+        
+    }else{
+        [HUD hide:YES];
+        UIAlertView *ConnetionTips=[[UIAlertView alloc] initWithTitle:@"提示" message:@"然而并没有找到附近有蓝牙配对设备的存在" delegate:self cancelButtonTitle:@"好吧" otherButtonTitles:@"继续搜索",nil];
+        ConnetionTips.tag=3;
+        [ConnetionTips show];
+    }
 }
 
 -(void)alertConnetionTips{
     UIAlertView *ConnetionTips=[[UIAlertView alloc] initWithTitle:@"提示" message:@"检测到您的周边" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"一键连接",nil];
     ConnetionTips.tag=2;
     [ConnetionTips show];
+    if (HUD) {
+        [HUD hide:YES];
+    }
 }
+
 
 #pragma alertview delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -122,15 +169,14 @@
         HUD.labelText = @"连接蓝牙中";
         [HUD show:YES];
         [_centralMgr connectPeripheral:_discoveredPeripheral options:nil];
-
+    }
+    if(alertView.tag==3&&buttonIndex==1){
+        [self alertSearchview];
     }
 }
 
-#pragma mark -
 #pragma mark MBProgressHUDDelegate methods
-
 - (void)hudWasHidden:(MBProgressHUD *)hud {
-    // Remove HUD from screen when the HUD was hidded
     NSLog(@"loading over");
     [HUD removeFromSuperview];
     HUD = nil;
@@ -148,12 +194,10 @@
         default:
             NSLog(@"蓝牙状态改变");
             NSDictionary *dic = @{
-                                  @"ConnectState":@"NO",
-                                  @"LockState":@"",
-                                  @"Batteryinfo":@"",
-                                  @"Ring":@""
+                                  @"ConnectState":@"NO"
                                   };
             [self notifiction:dic forname:@"APPDelegate"];
+            isConnect=NO;
             break;
     }
 }
@@ -179,11 +223,16 @@
             return NO;
         }
     }
+    //如果已经记录
     if ([discoveredBLEInfo.discoveredPeripheral.identifier.UUIDString isEqualToString:[CHKeychain load:@"LOCKUUID"]])
     {
         NSLog(@"发现配对的锁");
         _discoveredPeripheral=discoveredBLEInfo.discoveredPeripheral;
-        
+        isAround=YES;
+        NSDictionary *dic = @{
+                              @"AroundState":@"YES"
+                              };
+        [self notifiction:dic forname:@"APPDelegate"];
         [self alertConnetionTips];
     }
 
@@ -199,10 +248,7 @@
 {
     NSLog(@"didFailToConnectPeripheral : %@", error.localizedDescription);
     NSDictionary *dic = @{
-                          @"ConnectState":@"NO",
-                          @"LockState":@"",
-                          @"Batteryinfo":@"",
-                          @"Ring":@""
+                          @"ConnectState":@"NO"
                           };
     [self notifiction:dic forname:@"APPDelegate"];
 }
@@ -210,6 +256,7 @@
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     NSLog(@"已经连接设备");
+    isConnect=YES;
     [self.arrayServices removeAllObjects];
     [_discoveredPeripheral setDelegate:self];
     [_discoveredPeripheral discoverServices:nil];
@@ -246,13 +293,12 @@
      for (CBCharacteristic *c in service.characteristics)
      {
          //NSLog(@"Characteristic found with UUID: %@ inService UUID：%@", c.UUID,service.UUID);
-         
          //FFF1特征：发送数据控制硬件端
          if([c.UUID isEqual:[CBUUID UUIDWithString:@"FFE9"]]){
              _writeCharacteristic = c;
              NSLog(@"找到Write Characteristic : %@", c.UUID);
-            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:newuser:%@\r\n",_PhoneUUID]];
-            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:newuser:%@\r\n",_PhoneUUID]];
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:newuser:%@\r\n",PhoneUUID]];
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:newuser:%@\r\n",PhoneUUID]];
          }
          
          //FFF6特征：广播
@@ -276,13 +322,12 @@
     
     NSDictionary *dic = @{
                           @"ConnectState":@"YES",
-                          @"LockState":_LockState?_LockState:@"",
-                          @"Batteryinfo":_Batteryinfo?_Batteryinfo:@"",
-                          @"Ring":_Ring?_Ring:@""
+                          @"LockState":[NSString stringWithFormat:@"%d",isOnlock],
+                          @"Batteryinfo":Batteryinfo?Batteryinfo:@"",
+                          @"Ring":[NSString stringWithFormat:@"%d",isRingon]
                           };
     [self notifiction:dic forname:@"APPDelegate"];
     [HUD hide:YES];
-
     /*
     NSArray *list=[getvalue componentsSeparatedByString:@":"];
     NSString *flag=list[0];
@@ -330,8 +375,8 @@
     NSLog(@"接收到通知:%@",[notification userInfo]);
     NSString *Operation;
     if([[notification userInfo] objectForKey:@"LOCKUUID"]){
-        _LockUUID=[[notification userInfo] objectForKey:@"LOCKUUID"];
-        NSLog(@"收到锁的信息:%@",_LockUUID);
+        LockUUID=[[notification userInfo] objectForKey:@"LOCKUUID"];
+        NSLog(@"收到锁的信息:%@",LockUUID);
     }
     if ([[notification userInfo] objectForKey:@"Operation"]) {
         Operation=[[notification userInfo] objectForKey:@"Operation"];
@@ -339,13 +384,25 @@
             [self connectingDiscover];
             NSLog(@"收到连接指令");
         }
+        if([Operation isEqualToString:@"SEARCH"]){
+            [self alertSearchview];
+            NSLog(@"收到连接指令");
+        }
         if([Operation isEqualToString:@"OPEN"]){
-            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:open:%@\r\n",_PhoneUUID]];
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:open:%@\r\n",PhoneUUID]];
             NSLog(@"收到开锁指令");
         }
         if([Operation isEqualToString:@"CLOSE"]){
-            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:close:%@\r\n",_PhoneUUID]];
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:close:%@\r\n",PhoneUUID]];
             NSLog(@"收到关锁指令");
+        }
+        if([Operation isEqualToString:@"RINGON"]){
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:ringon:%@\r\n",PhoneUUID]];
+            NSLog(@"收到关报警指令");
+        }
+        if([Operation isEqualToString:@"RINGOFF"]){
+            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:ringoff:%@\r\n",PhoneUUID]];
+            NSLog(@"收到开报警指令");
         }
     }
 }

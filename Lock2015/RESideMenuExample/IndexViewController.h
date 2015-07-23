@@ -10,12 +10,10 @@
 #import "RESideMenu.h"
 #import "CBCCylinderBudgetChartView.h"
 #import "MBProgressHUD.h"
-
+#import "AppDelegate.h"
 @interface IndexViewController : UIViewController<CBCCylinderBudgetChartViewDataSource, CBCCylinderBudgetChartViewDelegate,UIAlertViewDelegate,MBProgressHUDDelegate>{
     MBProgressHUD *HUD;
 }
-@property BOOL isFirstusing;
-@property BOOL isConnected;
 
 @property (weak, nonatomic) IBOutlet UIButton *sidebutton;
 @property (weak, nonatomic) IBOutlet UIButton *setbutton;
