@@ -64,12 +64,14 @@
         self.dateLabel.text = [dateFormater stringFromDate:date];
         self.dateLabel.textColor=[UIColor greenColor];
         self.selectedDate = date;
+        _recordTime = [_selectedDate timeIntervalSince1970];
     }
     
     if(index==2){
         self.datelabel2.text = [dateFormater stringFromDate:date];
         self.datelabel2.textColor=[UIColor greenColor];
         self.selectedDate2 = date;
+        _recordTime2 = [_selectedDate2 timeIntervalSince1970];
     }
 }
 
@@ -83,10 +85,20 @@
     NSLog(@"Picker will dismiss with %lu", method);
 }
 - (IBAction)tofind:(id)sender {
-    UIViewController *viewController = [[UIViewController alloc] init];
-    viewController.title = @"Pushed Controller";
-    viewController.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController pushViewController:viewController animated:YES];
+    
+    NSString *urlstr=[NSString stringWithFormat:@"http://dong14lock.aliapp.com/position/%@/%@",[AppDelegate getlockUUID],[AppDelegate getphoneUUID]];
+    NSDictionary *searchdic=@{
+                              @"time_from":[NSString stringWithFormat:@"%llu",_recordTime],
+                              @"time_to":[NSString stringWithFormat:@"%llu",_recordTime2],
+                              @"pageSize":@"1000",
+                              @"pageNo":@"1"
+                              };
+    
+    [[ShenAFN shenInstance] JSONDataWithUrl:urlstr parameter:searchdic success:^(id jsondata) {
+        NSLog(@"%@",jsondata);
+    } fail:^{
+        NSLog(@"请求失败");
+    }];
 
 }
 

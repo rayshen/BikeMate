@@ -51,6 +51,11 @@ UISwitch *switchview;
         NSString *state=[[notification userInfo] objectForKey:@"ConnectState"];
         [self setConnectState:state];
     }
+    
+    if([[notification userInfo] objectForKey:@"RingState"]){
+        NSString *state=[[notification userInfo] objectForKey:@"RingState"];
+        [self setRingState:state];
+    }
 }
 
 -(void)setConnectState:(NSString *)string{
@@ -60,6 +65,16 @@ UISwitch *switchview;
     
     if ([string isEqualToString:@"NO"]) {
         switchview.userInteractionEnabled=NO;
+    }
+}
+
+-(void)setRingState:(NSString *)string{
+    if ([string isEqualToString:@"1"]) {
+        [switchview setOn:YES animated:YES];
+    }
+    
+    if ([string isEqualToString:@"0"]) {
+        [switchview setOn:NO animated:YES];
     }
 }
 #pragma mark -
@@ -165,7 +180,7 @@ UISwitch *switchview;
                 NSLog(@"switchButton %li turn on",(long)switchButton.tag);
                 if ((long)switchButton.tag==0) {
                     NSDictionary *dic = @{
-                                          @"Operation":@"RRNGON",
+                                          @"Operation":@"RINGON",
                                           };
                     [self notifiction:dic forname:@"LOCKCMD"];
                 }

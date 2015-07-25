@@ -21,7 +21,7 @@ static BOOL isAutoSearch;
 
 static NSString* PhoneUUID;
 static NSString* LockUUID;
-static NSString* Batteryinfo;
+static int Batteryinfo;
 
 
 @interface AppDelegate ()
@@ -98,6 +98,17 @@ static NSString* Batteryinfo;
     return isRingon;
 }
 
++(NSString *)getphoneUUID{
+    return PhoneUUID;
+}
+
++(NSString *)getlockUUID{
+    return LockUUID;
+}
+
++(int)getBatteryinfo{
+    return Batteryinfo;
+}
 #pragma mark--获取设备UUID
 -(NSString*)uuid{
     if ([CHKeychain load:UUIDKEY]) {
@@ -251,11 +262,30 @@ static NSString* Batteryinfo;
                           @"ConnectState":@"NO"
                           };
     [self notifiction:dic forname:@"APPDelegate"];
+    isConnect=NO;
+}
+
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    NSDictionary *dic = @{
+                          @"ConnectState":@"NO"
+                          };
+    [self notifiction:dic forname:@"APPDelegate"];
+    UIAlertView *ConnetionTips=[[UIAlertView alloc] initWithTitle:@"提示" message:@"蓝牙连接丢失啦~" delegate:self cancelButtonTitle:@"(⊙o⊙)哦" otherButtonTitles:nil];
+    ConnetionTips.tag=4;
+    [ConnetionTips show];
+    isConnect=NO;
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     NSLog(@"已经连接设备");
+    /*
+    NSDictionary *dic = @{
+                          @"ConnectState":@"YES"
+                          };
+    [self notifiction:dic forname:@"APPDelegate"];
+    [HUD hide:YES];
+     */
     isConnect=YES;
     [self.arrayServices removeAllObjects];
     [_discoveredPeripheral setDelegate:self];
@@ -290,14 +320,13 @@ static NSString* Batteryinfo;
         return;
     }
     
-     for (CBCharacteristic *c in service.characteristics)
+    for (CBCharacteristic *c in service.characteristics)
      {
          //NSLog(@"Characteristic found with UUID: %@ inService UUID：%@", c.UUID,service.UUID);
          //FFF1特征：发送数据控制硬件端
          if([c.UUID isEqual:[CBUUID UUIDWithString:@"FFE9"]]){
              _writeCharacteristic = c;
              NSLog(@"找到Write Characteristic : %@", c.UUID);
-            [self writeToPeripheral:[NSString stringWithFormat:@"dong14:newuser:%@\r\n",PhoneUUID]];
             [self writeToPeripheral:[NSString stringWithFormat:@"dong14:newuser:%@\r\n",PhoneUUID]];
          }
          
@@ -319,24 +348,52 @@ static NSString* Batteryinfo;
     //NSLog(@"Notify:this Character with UUID %@ value is:%@",characteristic.UUID,characteristic.value);
     NSString *getvalue=[[NSString alloc]initWithData:characteristic.value encoding:NSASCIIStringEncoding];
     NSLog(@"Notify Value is %@",getvalue);
-    
-    NSDictionary *dic = @{
-                          @"ConnectState":@"YES",
-                          @"LockState":[NSString stringWithFormat:@"%d",isOnlock],
-                          @"Batteryinfo":Batteryinfo?Batteryinfo:@"",
-                          @"Ring":[NSString stringWithFormat:@"%d",isRingon]
-                          };
-    [self notifiction:dic forname:@"APPDelegate"];
-    [HUD hide:YES];
-    /*
     NSArray *list=[getvalue componentsSeparatedByString:@":"];
-    NSString *flag=list[0];
-    NSString *cmd=list[1];
-    NSString *cmdvalue=list[2];
-    if ([flag isEqualToString:@"dong14"]) {
-        if ([cmd isEqualToString:@""]) {
-            
+    NSString *cmd,*value;
+    if (list[0]) {
+        cmd=list[0];
+    }
+
+    if([cmd isEqualToString:@"OK"]){
+        if (list[1]) {
+            value=list[1];
+            NSArray *configlist=[value componentsSeparatedByString:@"#"];
+            NSString *battery,*lockstate,*ringstate;
+            if(configlist[0]){
+                battery=configlist[0];
+                Batteryinfo=[battery intValue];
+            }
+            if(configlist[1]){
+                lockstate=configlist[1];
+                if ([lockstate isEqualToString:@"1"]) {
+                    isOnlock=YES;
+                }else{
+                    isOnlock=NO;
+                }
+            }
+            if(configlist[2]){
+                ringstate=configlist[2];
+                if ([ringstate isEqualToString:@"1"]) {
+                    isRingon=YES;
+                }else{
+                    isRingon=NO;
+                }
+            }
         }
+        NSDictionary *dic = @{
+                              @"ConnectState":@"YES",
+                              @"LockState":[NSString stringWithFormat:@"%d",isOnlock],
+                              @"Batteryinfo":[NSString stringWithFormat:@"%i",Batteryinfo],
+                              @"RingState":[NSString stringWithFormat:@"%d",isRingon]
+                              };
+        [self notifiction:dic forname:@"APPDelegate"];
+        [HUD hide:YES];
+    }
+
+    
+    /*
+    if ([flag isEqualToString:@"dong14"]) {
+     
         if ([cmd isEqualToString:@""]) {
             
         }
@@ -398,11 +455,11 @@ static NSString* Batteryinfo;
         }
         if([Operation isEqualToString:@"RINGON"]){
             [self writeToPeripheral:[NSString stringWithFormat:@"dong14:ringon:%@\r\n",PhoneUUID]];
-            NSLog(@"收到关报警指令");
+            NSLog(@"收到开报警指令");
         }
         if([Operation isEqualToString:@"RINGOFF"]){
             [self writeToPeripheral:[NSString stringWithFormat:@"dong14:ringoff:%@\r\n",PhoneUUID]];
-            NSLog(@"收到开报警指令");
+            NSLog(@"收到关报警指令");
         }
     }
 }

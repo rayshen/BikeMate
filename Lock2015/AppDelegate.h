@@ -34,5 +34,8 @@ CBPeripheralDelegate,UIAlertViewDelegate,MBProgressHUDDelegate>{
 
 +(BOOL)getisConnect;
 +(BOOL)getisOnlock;
++(NSString *)getphoneUUID;
++(NSString *)getlockUUID;
++(int)getBatteryinfo;
 @end
 

@@ -6,8 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecordViewController">
             <connections>
+                <outlet property="distancelabel" destination="OjX-6O-RjS" id="xeA-KR-Kh5"/>
                 <outlet property="navibutton" destination="zM5-0Y-eiy" id="9tg-MJ-7fg"/>
                 <outlet property="sidemenu" destination="MGZ-Po-dKN" id="69H-jk-NAx"/>
+                <outlet property="speedlabel" destination="Kdm-kK-iCg" id="FiB-gc-a17"/>
+                <outlet property="totalcalorielabel" destination="etQ-4I-8i6" id="49l-jR-5Fl"/>
+                <outlet property="totlemileslabel" destination="shH-3R-hrK" id="wPF-RN-6N3"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Xnd-LE-fIj"/>
             </connections>
         </placeholder>
@@ -46,8 +50,8 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total mileage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7v1-1O-rCk">
-                    <rect key="frame" x="20" y="345" width="101" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total mileage(km)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7v1-1O-rCk">
+                    <rect key="frame" x="20" y="345" width="134" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -59,7 +63,7 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shH-3R-hrK">
-                    <rect key="frame" x="32" y="376" width="77" height="42"/>
+                    <rect key="frame" x="49" y="376" width="77" height="42"/>
                     <fontDescription key="fontDescription" type="system" pointSize="35"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>

@@ -10,7 +10,23 @@
 #import "RESideMenu.h"
 #import "DBTileButton.h"
 #import "MapViewController.h"
-@interface RecordViewController : UIViewController
+#import <CoreLocation/CoreLocation.h>
+
+@interface RecordViewController : UIViewController<CLLocationManagerDelegate>{
+    CLLocationManager *locationManager;
+}
+@property CLLocationSpeed currentSpeed;
+@property double totalDistance;
+@property double totalmiles;
+@property double totalcalorie;
+@property CLLocation *currentLocation;
+@property CLLocation *oldLocation;
+
+@property (weak, nonatomic) IBOutlet UILabel *speedlabel;
+@property (weak, nonatomic) IBOutlet UILabel *distancelabel;
+@property (weak, nonatomic) IBOutlet UILabel *totlemileslabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *totalcalorielabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *sidemenu;
 @property (weak, nonatomic) IBOutlet DBTileButton *navibutton;

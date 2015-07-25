@@ -27,18 +27,19 @@
     }else{
         [self setConnectState:@"NO"];
     }
-
-	self.title = @"首页";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Left"
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(presentLeftMenuViewController:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Right"
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(presentRightMenuViewController:)];
     
-        
+    if ([AppDelegate getisOnlock]==YES) {
+        [self setLockState:@"0"];
+    }else{
+        [self setLockState:@"1"];
+    }
+    
+    /**电池*/
+    batteryvalue=[AppDelegate getBatteryinfo];
+    _chart.delegate = self;
+    _chart.dataSource = self;
+    [_chart reloadData];
+    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -48,19 +49,7 @@
     /**加锁解锁*/
     [_sidebutton addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
     [_setbutton addTarget:self action:@selector(presentRightMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
-    
-    if ([AppDelegate getisOnlock]==YES) {
-        [_lockbutton setImage:[UIImage imageNamed:@"onlock"] forState:UIControlStateNormal];
-    }else{
-        [_lockbutton setImage:[UIImage imageNamed:@"unlock"] forState:UIControlStateNormal];
-    }
     [_lockbutton addTarget:self action:@selector(lockbuttonclk:) forControlEvents:UIControlEventTouchUpInside];
-    
-    /**电池*/
-    batteryvalue = 50;
-    _chart.delegate = self;
-    _chart.dataSource = self;
-    [_chart reloadData];
 
     _ConnetionTips=[[UIAlertView alloc] initWithTitle:@"提示" message:@"您还没有连接蓝牙，现在进行搜索设备并连接吗？" delegate:self cancelButtonTitle:@"搜索" otherButtonTitles:nil];
     _ConnetionTips.tag=2;
@@ -68,14 +57,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBLEstate:) name:@"APPDelegate" object:nil];
 }
 
--(void)changeBLEstate:(NSNotification*)notification
-{
-    NSLog(@"%@",[notification userInfo]);
-    if([[notification userInfo] objectForKey:@"ConnectState"]){
-        NSString *state=[[notification userInfo] objectForKey:@"ConnectState"];
-        [self setConnectState:state];
-    }
-}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -88,6 +70,23 @@
     [super viewWillDisappear:animated];
 }
 
+-(void)changeBLEstate:(NSNotification*)notification
+{
+    NSLog(@"%@",[notification userInfo]);
+    if([[notification userInfo] objectForKey:@"ConnectState"]){
+        NSString *state=[[notification userInfo] objectForKey:@"ConnectState"];
+        [self setConnectState:state];
+    }
+    if([[notification userInfo] objectForKey:@"LockState"]){
+        NSString *state=[[notification userInfo] objectForKey:@"LockState"];
+        [self setLockState:state];
+    }
+    if([[notification userInfo] objectForKey:@"Batteryinfo"]){
+        NSString *state=[[notification userInfo] objectForKey:@"Batteryinfo"];
+        [self setBatteryvalue:[state intValue]];
+    }
+}
+
 
 -(void)setConnectState:(NSString *)string{
     if ([string isEqualToString:@"YES"]) {
@@ -98,6 +97,24 @@
     if ([string isEqualToString:@"NO"]) {
         [_connectingstatelabel setText:@"未连接"];
         [_connectingstatelabel setTextColor:[UIColor redColor]];
+    }
+}
+
+-(void)setBatteryvalue:(int)battery{
+    NSLog(@"设置电池%d",battery);
+    batteryvalue=battery;
+    [_chart reloadData];
+}
+
+-(void)setLockState:(NSString *)string{
+    if ([string isEqualToString:@"0"]) {
+        [_lockbutton setImage:[UIImage imageNamed:@"onlock"] forState:UIControlStateNormal];
+        _isOnLock=YES;
+    }
+    
+    if ([string isEqualToString:@"1"]) {
+        [_lockbutton setImage:[UIImage imageNamed:@"unlock"] forState:UIControlStateNormal];
+        _isOnLock=NO;
     }
 }
 /****************函数区域****************/
@@ -118,14 +135,14 @@
             _isOnLock=NO;
             [_lockbutton setImage:[UIImage imageNamed:@"unlock"] forState:UIControlStateNormal];
             NSDictionary *dic = @{
-                                  @"Operation":@"CLOSE",
+                                  @"Operation":@"OPEN",
                                   };
             [self notifiction:dic forname:@"LOCKCMD"];
         }else{
             _isOnLock=YES;
             [_lockbutton setImage:[UIImage imageNamed:@"onlock"] forState:UIControlStateNormal];
             NSDictionary *dic = @{
-                                  @"Operation":@"OPEN",
+                                  @"Operation":@"CLOSE",
                                   };
             [self notifiction:dic forname:@"LOCKCMD"];
         }

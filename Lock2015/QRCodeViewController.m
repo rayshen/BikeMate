@@ -155,7 +155,7 @@ NSString *LOCKUUID;
     HUD = [[MBProgressHUD alloc] initWithView:self.view.window];
     [self.view.window addSubview:HUD];
     HUD.delegate = self;
-    HUD.labelText = @"连接蓝牙并绑定中";
+    HUD.labelText = @"绑定设备中";
     [HUD showWhileExecuting:@selector(myTask) onTarget:self withObject:nil animated:YES];
 }
 
