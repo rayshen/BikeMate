@@ -274,6 +274,9 @@ static int Batteryinfo;
     ConnetionTips.tag=4;
     [ConnetionTips show];
     isConnect=NO;
+    if(HUD){
+        [HUD hide:YES];
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral

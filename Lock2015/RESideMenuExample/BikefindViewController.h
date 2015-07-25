@@ -11,8 +11,13 @@
 #import "HSDatePickerViewController.h"
 #import "ShenAFN.h"
 #import "AppDelegate.h"
-#import "MapViewController.h"
-@interface BikefindViewController : UIViewController <HSDatePickerViewControllerDelegate,UIGestureRecognizerDelegate>
+#import "BikerouteViewController.h"
+#import "MBProgressHUD.h"
+
+@interface BikefindViewController : UIViewController <HSDatePickerViewControllerDelegate,UIGestureRecognizerDelegate,MBProgressHUDDelegate>{
+    MBProgressHUD *HUD;
+}
+
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *datelabel2;
 @property UInt64 recordTime;
@@ -21,7 +26,8 @@
 @property (nonatomic, strong) NSDate *selectedDate2;
 - (IBAction)tofind:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *bgview;
-
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
-
+@property BOOL iflost;
+@property int sumresults;
+@property NSDictionary *resultdic;
 @end

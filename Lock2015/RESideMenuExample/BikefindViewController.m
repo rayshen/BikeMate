@@ -85,22 +85,19 @@
     NSLog(@"Picker will dismiss with %lu", method);
 }
 - (IBAction)tofind:(id)sender {
-    
-    NSString *urlstr=[NSString stringWithFormat:@"http://dong14lock.aliapp.com/position/%@/%@",[AppDelegate getlockUUID],[AppDelegate getphoneUUID]];
-    NSDictionary *searchdic=@{
-                              @"time_from":[NSString stringWithFormat:@"%llu",_recordTime],
-                              @"time_to":[NSString stringWithFormat:@"%llu",_recordTime2],
-                              @"pageSize":@"1000",
-                              @"pageNo":@"1"
-                              };
-    
-    [[ShenAFN shenInstance] JSONDataWithUrl:urlstr parameter:searchdic success:^(id jsondata) {
-        NSLog(@"%@",jsondata);
-    } fail:^{
-        NSLog(@"请求失败");
-    }];
-
+    if(_recordTime>_recordTime2||_recordTime==0||_recordTime2==0){
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"您选择的时间有误" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    // The hud will dispable all input on the window
+    HUD = [[MBProgressHUD alloc] initWithView:self.view.window];
+    [self.view.window addSubview:HUD];
+    HUD.delegate = self;
+    HUD.labelText = @"网络查询查询中...";
+    [HUD showWhileExecuting:@selector(URLrequest) onTarget:self withObject:nil animated:YES];
 }
+
 
 //添加侧滑手势
 -(void)addges{
@@ -112,5 +109,62 @@
 
 -(void)gotoright{
     NSLog(@"检测有左滑");
+}
+
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    NSLog(@"loading over");
+    [HUD removeFromSuperview];
+    HUD = nil;
+    if(_iflost==YES){
+        NSLog(@"找到丢失记录");
+        BikerouteViewController *BrVC=[[BikerouteViewController alloc]init];
+        BrVC.resultdic=_resultdic;
+        [self.navigationController pushViewController:BrVC animated:YES];
+    }
+}
+
+-(void)URLrequest{
+    // 初始化请求
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    NSString *url=[NSString stringWithFormat:@"http://dong14lock.aliapp.com/position/%@/%@?pageSize=9999&pageNo=1&time_from=%llu&time_to=%llu",[AppDelegate getlockUUID],[AppDelegate getphoneUUID],_recordTime,_recordTime2];
+    // 设置URL
+    [request setURL:[NSURL URLWithString:url]];
+    // 设置HTTP方法
+    [request setHTTPMethod:@"GET"];
+    // 发 送同步请求, 这里得returnData就是返回得数据了
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                               returningResponse:nil error:nil];
+    NSString *returnstr = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    NSData *jsonData = [returnstr dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    NSLog(@"%@",dic);
+    if ([dic valueForKey:@"status"]) {
+        NSLog(@"%@",[dic valueForKey:@"status"]);
+        NSNumber *intNumber = [NSNumber numberWithInteger:0];
+        
+        if([[dic valueForKey:@"status"] isEqualToNumber:intNumber]){
+            NSDictionary *datadic=[dic valueForKey:@"data"];
+            if([datadic valueForKey:@"result"]){
+                _resultdic=[datadic valueForKey:@"result"];
+                _iflost=YES;
+            }else{
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"没有查询到丢失记录" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+                [alert show];
+            }
+        }else{
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"该锁还未登记吧" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
 }
 @end

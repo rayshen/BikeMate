@@ -38,6 +38,7 @@
     }];
 }
 
+
 #pragma mark - JSON方式获取数据
 - (void)JSONDataWithUrl:(NSString *)urlStr parameter:(NSDictionary *)parameter success:(void (^)(id jsondata))success fail:(void (^)())fail
 {
@@ -45,9 +46,31 @@
     //设置请求格式
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     //设置接收格式
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    
     [manager GET:urlStr parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+        if (fail) {
+            fail();
+        }
+    }];
+}
+
+
+#pragma mark - JSON方式get提交数据
+- (void)getJSONWithUrl:(NSString *)urlStr parameters:(id)parameters success:(void (^)(id responseObject))success fail:(void (^)())fail
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    // 设置请求格式
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    // 设置返回格式
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager GET:urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //查看返回数据
+        //NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if (success) {
             success(responseObject);
         }
@@ -98,6 +121,7 @@
         }
     }];
 }
+
 
 #pragma mark - Session 下载下载文件
 - (void)sessionDownloadWithUrl:(NSString *)urlStr success:(void (^)(NSURL *fileURL))success fail:(void (^)())fail

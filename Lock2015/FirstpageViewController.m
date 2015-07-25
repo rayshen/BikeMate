@@ -50,20 +50,20 @@ UIImageView *imageView;
 
 - (void)showIntroWithCrossDissolve {
     EAIntroPage *page1 = [EAIntroPage page];
-    page1.title = @"Hello world";
-    page1.desc = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    page1.title = @"蓝牙解锁";
+    page1.desc = @"骑行之旅，未来科技一路伴随。";
     page1.bgImage = [UIImage imageNamed:@"1"];
     page1.titleImage = [UIImage imageNamed:@"original"];
     
     EAIntroPage *page2 = [EAIntroPage page];
-    page2.title = @"This is page 2";
-    page2.desc = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.";
+    page2.title = @"防盗鸣笛";
+    page2.desc = @"有人对爱车心怀不轨？不怕，我会智能鸣笛。";
     page2.bgImage = [UIImage imageNamed:@"2"];
     page2.titleImage = [UIImage imageNamed:@"supportcat"];
     
     EAIntroPage *page3 = [EAIntroPage page];
-    page3.title = @"This is page 3";
-    page3.desc = @"Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.";
+    page3.title = @"旅程导航记录";
+    page3.desc = @"实时速度、里程数、卡路里\n导航您健康的骑行生活。";
     page3.bgImage = [UIImage imageNamed:@"3"];
     page3.titleImage = [UIImage imageNamed:@"femalecodertocat"];
     
@@ -120,23 +120,23 @@ UIImageView *imageView;
 
 - (void)showCustomIntro {
     EAIntroPage *page1 = [EAIntroPage page];
-    page1.title = @"Hello world";
-    page1.desc = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    page1.title = @"智能蓝牙解锁";
+    page1.desc = @"骑行之旅，未来科技一路伴随。";
     page1.titleImage = [UIImage imageNamed:@"original"];
     
     EAIntroPage *page2 = [EAIntroPage page];
-    page2.title = @"This is page 2";
+    page2.title = @"防盗鸣笛";
     page2.titlePositionY = 180;
-    page2.desc = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.";
+    page2.desc = @"有人对爱车心怀不轨？不怕，我有自动警报。";
     page2.descPositionY = 160;
     page2.titleImage = [UIImage imageNamed:@"supportcat"];
     page2.imgPositionY = 70;
     
     EAIntroPage *page3 = [EAIntroPage page];
-    page3.title = @"This is page 3";
+    page3.title = @"旅程记录";
     page3.titleFont = [UIFont fontWithName:@"Georgia-BoldItalic" size:20];
     page3.titlePositionY = 220;
-    page3.desc = @"Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.";
+    page3.desc = @"实时速度、里程数、卡路里，引领健康的骑行生活。";
     page3.descFont = [UIFont fontWithName:@"Georgia-Italic" size:18];
     page3.descPositionY = 200;
     page3.titleImage = [UIImage imageNamed:@"femalecodertocat"];

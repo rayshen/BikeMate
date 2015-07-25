@@ -18,13 +18,10 @@
 -(void)loadMapSiteMessage:(NSString *)city;
 @end
 
-@interface MapViewController : UIViewController<MKMapViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate,CLLocationManagerDelegate,doAcSheetDelegate,UISearchBarDelegate,UpdateAlertDelegate>{
-    CLLocationManager *locationManager;
-}
+@interface MapViewController : UIViewController<MKMapViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate,CLLocationManagerDelegate,doAcSheetDelegate,UISearchBarDelegate,UpdateAlertDelegate>
 @property BOOL iffollowed;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchbar;
 @property(nonatomic,assign) id<MapViewControllerDelegate> siteDelegate;
 @property(nonatomic,strong) NSDictionary *navDic;
-
 -(void)naviClick;
 @end

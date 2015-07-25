@@ -1,12 +1,13 @@
 //
-//  MapViewController.m
-//  AnjukeBroker_New
+//  BikerouteViewController.m
+//  Lock2015
 //
-//  Created by shan xu on 14-3-18.
-//  Copyright (c) 2014年 Wu sicong. All rights reserved.
+//  Created by shen on 15/7/25.
+//  Copyright (c) 2015年 shen. All rights reserved.
 //
 
-#import "MapViewController.h"
+
+#import "BikerouteViewController.h"
 #import "RegionAnnotation.h"
 #import "CheckInstalledMapAPP.h"
 #import "LocationChange.h"
@@ -22,8 +23,7 @@
 #define FRAME_USER_LOC CGRectMake(8, [self windowHeight]-44, 40, 40)
 
 
-@interface MapViewController ()
-
+@interface BikerouteViewController ()
 //导航目的地2d,百度
 @property(nonatomic,assign) CLLocationCoordinate2D naviCoordsBd;
 //导航目的地2d,高德
@@ -54,34 +54,17 @@
 //定位状态，包括6种状态
 @property(nonatomic, assign) int loadStatus;
 
-@property (weak, nonatomic) IBOutlet DBTileButton *databutton;
-- (IBAction)backtodata:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *goUserLocBtn;
 
 @property MKRoute *Naviroute;
 @property MKRoute *Myroute;
 @property NSMutableArray *nowRoadArray;
-
+@property QSearchViewController *QSVC;
+@property CLLocation *loation;
 @end
 
-CLLocationCoordinate2D lastCoords[2];
-
-QSearchViewController *QSVC;
-@implementation MapViewController
-@synthesize regionMapView;
-@synthesize addressStr;
-@synthesize updateInt;
-@synthesize userRegion;
-@synthesize naviRegion;
-@synthesize naviCoordsBd;
-@synthesize naviCoordsGd;
-@synthesize nowCoords;
-@synthesize regionStr;
-@synthesize navDic;
-@synthesize requestLocArr;
-@synthesize centerCoordinate;
-@synthesize regionAnnotation;
-@synthesize loadStatus;
+CLLocationCoordinate2D myCoords[];
+@implementation BikerouteViewController
 
 - (NSInteger)windowWidth {
     return [[[[UIApplication sharedApplication] windows] objectAtIndex:0] frame].size.width;
@@ -93,7 +76,6 @@ QSearchViewController *QSVC;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self searchbarsetting];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     self.regionMapView.delegate = self;
     self.regionMapView.showsUserLocation = YES;
@@ -103,107 +85,61 @@ QSearchViewController *QSVC;
     [self.locationManager requestAlwaysAuthorization];
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationManager setDistanceFilter:kCLDistanceFilterNone];
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
+    if ([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [_locationManager requestWhenInUseAuthorization];
     }
     [self.locationManager startUpdatingLocation];
     
     [_goUserLocBtn addTarget:self action:@selector(goUserLoc:) forControlEvents:UIControlEventTouchUpInside];
     [_goUserLocBtn setImage:[UIImage imageNamed:@"wl_map_icon_position"] forState:UIControlStateNormal];
-
+    
     [self.view bringSubviewToFront:_goUserLocBtn];
-    [self.view bringSubviewToFront:_databutton];
-    [self.view bringSubviewToFront:_searchbar];
     
-    //显示导航的点,先把要查询的地点的坐标转换成地图坐标，然后在地图显示该地点
-    //[self addnaviitem];
+    int resultnum;
+    for (NSDictionary *suchdic in _resultdic) {
+        _loation=[[CLLocation alloc] initWithLatitude:[[suchdic valueForKey:@"latitude"] floatValue] longitude:[[suchdic valueForKey:@"longitude"] floatValue]];
+        CLLocationCoordinate2D suchCoords=[_loation coordinate];
+        myCoords[resultnum]=suchCoords;
+        resultnum++;
+    }
     
-    /*
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:@"屏峰" completionHandler:^(NSArray *placemarks, NSError *error) {
-        if ([placemarks count] > 0 && error == nil){
-            NSLog(@"Found %lu placemark(s).", (unsigned long)[placemarks count]);
-            CLPlacemark *firstPlacemark = [placemarks objectAtIndex:0];
-            NSLog(@"Longitude = %f", firstPlacemark.location.coordinate.longitude);
-            NSLog(@"Latitude = %f", firstPlacemark.location.coordinate.latitude);
-        }
-        else if ([placemarks count] == 0 && error == nil){
-            NSLog(@"Found no placemarks.");
-        }
-        else if (error != nil){
-            NSLog(@"An error occurred = %@", error);
-        }
-    }];
-    */
-}
-
--(void)searchbarsetting{
-    _searchbar.placeholder = @"点击搜索目的地";
-    _searchbar.delegate=self;
+    Routepolyline *cc = [Routepolyline polylineWithCoordinates:myCoords count:[_resultdic count]];//执行画线方法
+    [self.regionMapView insertOverlay:cc atIndex:2];
+    self.lastRegion = MKCoordinateRegionMakeWithDistance([_loation coordinate], 200, 200);
+    [self.regionMapView setRegion:self.lastRegion animated:YES];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    QSVC=[[QSearchViewController alloc]init];
-    QSVC.delegate=self;
-    QSVC.myregion=_myregion;
-    QSVC.city=self.city;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:QSVC];
+    _QSVC=[[QSearchViewController alloc]init];
+    _QSVC.delegate=self;
+    _QSVC.myregion=_myregion;
+    _QSVC.city=self.city;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_QSVC];
     [self presentViewController:nav animated:YES completion:nil];
     return NO;
-}
-
--(void)addnaviitem{
-    /*
-     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-        @"中国上海市陆家嘴延安东路",@"address",
-        @"上海市",@"city",
-        @"google",@"from_map_type",
-        @"31.23733484",@"google_lat",
-        @"121.50142656",@"google_lng",
-        @"浦东新区",@"region", nil];
-        self.navDic = dic;
-     */
-    /*
-     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-        @"留下镇留和路288号",@"address",
-        @"杭州市",@"city",
-        @"baidu",@"from_map_type",
-        @"30.230782",@"baidu_lat",
-        @"120.043408",@"baidu_lng",
-        @"浙江工业大学(留和路)",@"region", nil];
-     self.navDic = dic;
-    
-    
-    self.navDic = dic;
-    [self getChangedLoc];
-    CLLocation *loc = [[CLLocation alloc] initWithLatitude:_naviCoordsGd.latitude longitude:_naviCoordsGd.longitude];
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(_naviCoordsGd, 500, 500);
-    self.naviRegion = [self.regionMapView regionThatFits:viewRegion];
-    [self showAnnotation:loc coord:_naviCoordsGd];
-    */
 }
 
 #pragma mark - 百度和火星经纬度转换
 -(void)getChangedLoc{
     if ([LocIsBaidu locIsBaid:self.navDic]) {
-        naviCoordsBd.latitude = [[self.navDic objectForKey:@"baidu_lat"] doubleValue];
-        naviCoordsBd.longitude = [[self.navDic objectForKey:@"baidu_lng"] doubleValue];
+        _naviCoordsBd.latitude = [[self.navDic objectForKey:@"baidu_lat"] doubleValue];
+        _naviCoordsBd.longitude = [[self.navDic objectForKey:@"baidu_lng"] doubleValue];
         
         double gdLat,gdLon;
-        bd_decrypt(naviCoordsBd.latitude, naviCoordsBd.longitude, &gdLat, &gdLon);
+        bd_decrypt(_naviCoordsBd.latitude, _naviCoordsBd.longitude, &gdLat, &gdLon);
         
-        naviCoordsGd.latitude = gdLat;
-        naviCoordsGd.longitude = gdLon;
+        _naviCoordsGd.latitude = gdLat;
+        _naviCoordsGd.longitude = gdLon;
     }else{
-
-        naviCoordsGd.latitude = [[self.navDic objectForKey:@"google_lat"] doubleValue];
-        naviCoordsGd.longitude = [[self.navDic objectForKey:@"google_lng"] doubleValue];
+        
+        _naviCoordsGd.latitude = [[self.navDic objectForKey:@"google_lat"] doubleValue];
+        _naviCoordsGd.longitude = [[self.navDic objectForKey:@"google_lng"] doubleValue];
         
         double bdLat,bdLon;
-        bd_encrypt(naviCoordsGd.latitude, naviCoordsGd.longitude, &bdLat, &bdLon);
+        bd_encrypt(_naviCoordsGd.latitude, _naviCoordsGd.longitude, &bdLat, &bdLon);
         
-        naviCoordsBd.latitude = bdLat;
-        naviCoordsBd.longitude = bdLon;
+        _naviCoordsBd.latitude = bdLat;
+        _naviCoordsBd.longitude = bdLon;
     }
 }
 
@@ -217,7 +153,7 @@ QSearchViewController *QSVC;
 }
 
 -(void)goUserLoc:(id)sender{
-    if(updateInt>0){
+    if(_updateInt>0){
         if (_iffollowed==NO) {
             _iffollowed=YES;
             [_goUserLocBtn setImage:[UIImage imageNamed:@"wl_map_icon_position_press"] forState:UIControlStateNormal];
@@ -253,14 +189,14 @@ QSearchViewController *QSVC;
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSString *btnTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     if (buttonIndex == 0) {
-            CLLocationCoordinate2D to;
-            to.latitude = naviCoordsGd.latitude;
-            to.longitude = naviCoordsGd.longitude;
-            MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
-            MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:to addressDictionary:nil]];
-            
-            toLocation.name = addressStr;
-            [MKMapItem openMapsWithItems:[NSArray arrayWithObjects:currentLocation, toLocation, nil] launchOptions:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeDriving, [NSNumber numberWithBool:YES], nil] forKeys:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeKey, MKLaunchOptionsShowsTrafficKey, nil]]];
+        CLLocationCoordinate2D to;
+        to.latitude = _naviCoordsGd.latitude;
+        to.longitude = _naviCoordsGd.longitude;
+        MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:to addressDictionary:nil]];
+        
+        toLocation.name = _addressStr;
+        [MKMapItem openMapsWithItems:[NSArray arrayWithObjects:currentLocation, toLocation, nil] launchOptions:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeDriving, [NSNumber numberWithBool:YES], nil] forKeys:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeKey, MKLaunchOptionsShowsTrafficKey, nil]]];
     }
     if ([btnTitle isEqualToString:@"google地图"]) {
         NSString *urlStr = [NSString stringWithFormat:@"comgooglemaps://?saddr=%.8f,%.8f&daddr=%.8f,%.8f&directionsmode=transit",self.nowCoords.latitude,self.nowCoords.longitude,self.naviCoordsGd.latitude,self.naviCoordsGd.longitude];
@@ -284,8 +220,8 @@ QSearchViewController *QSVC;
 }
 
 -(void)drawRout{
-    MKPlacemark *fromPlacemark = [[MKPlacemark alloc] initWithCoordinate:nowCoords addressDictionary:nil];
-    MKPlacemark *toPlacemark   = [[MKPlacemark alloc] initWithCoordinate:naviCoordsGd addressDictionary:nil];
+    MKPlacemark *fromPlacemark = [[MKPlacemark alloc] initWithCoordinate:_nowCoords addressDictionary:nil];
+    MKPlacemark *toPlacemark   = [[MKPlacemark alloc] initWithCoordinate:_naviCoordsGd addressDictionary:nil];
     MKMapItem *fromItem = [[MKMapItem alloc] initWithPlacemark:fromPlacemark];
     MKMapItem *toItem   = [[MKMapItem alloc] initWithPlacemark:toPlacemark];
     
@@ -372,8 +308,8 @@ QSearchViewController *QSVC;
 #pragma mark MKMapViewDelegate -user location定位变化
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     NSLog(@"定位到当前位置");
-    updateInt++;
-
+    _updateInt++;
+    
     _userlocation=userLocation;
     self.nowCoords = [userLocation coordinate];
     
@@ -382,11 +318,11 @@ QSearchViewController *QSVC;
     
     //放大地图到自身的经纬度位置。
     self.userRegion = MKCoordinateRegionMakeWithDistance(self.nowCoords, 200, 200);
-    if(updateInt==1||_iffollowed==YES){
+    if(_iffollowed==YES){
         [self.regionMapView setRegion:self.userRegion animated:NO];
     }
     //仅在打开地图后，第一次更新地理信息时，确定使用者的大致地理位置
-    if (updateInt<=1) {
+    if (_updateInt<=1) {
         //CLGeocoder 是谷歌接口通过经纬度查询大致地址
         NSLog(@"通过经纬度查询地理信息");
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
@@ -399,8 +335,7 @@ QSearchViewController *QSVC;
                 self.regionStr = region;
                 self.addressStr = address;
                 self.city = placemark.locality;
-                [self.siteDelegate loadMapSiteMessage:self.city];
-                [QSVC setCity:self.city];
+                [_QSVC setCity:self.city];
                 NSLog(@"当前使用者所在：地点名：%@，地址：%@，城市：%@",self.regionStr,self.addressStr,self.city);
             }else{
                 self.regionStr = @"";
@@ -409,13 +344,8 @@ QSearchViewController *QSVC;
                 NSLog(@"未查询到有效地址");
             }
         }];
-        lastCoords[0]=nowCoords;
     }else{
-        lastCoords[1]=nowCoords;
-        //绘制路线
-        Routepolyline *cc = [Routepolyline polylineWithCoordinates:lastCoords count:2];//执行画线方法
-        [self.regionMapView insertOverlay:cc atIndex:2];
-        lastCoords[0]=lastCoords[1];
+
     }
 }
 
@@ -431,7 +361,7 @@ QSearchViewController *QSVC;
     //如果导航字典里存有要导航的地址信息，插目的地的标志
     if (![[self.navDic objectForKey:@"region"] isEqualToString:@""]&&[self.navDic objectForKey:@"region"]!=nil) {
         NSLog(@"存在导航目的地信息,目的地：%@",[self.navDic objectForKey:@"region"]);
-        loadStatus = 4;
+        _loadStatus = 4;
         [self addAnnotationView:location coord:coords region:[self.navDic objectForKey:@"region"]  address:[self.navDic objectForKey:@"address"]];
         return;
     }
@@ -451,18 +381,18 @@ QSearchViewController *QSVC;
     self.regionAnnotation.title = region;
     self.regionAnnotation.subtitle  = address;
     
-    if (loadStatus == 0) {
+    if (_loadStatus == 0) {
         self.regionAnnotation.annotationStatus = ChooseLoading;
-    }else if (loadStatus == 1){
+    }else if (_loadStatus == 1){
         self.regionAnnotation.annotationStatus = ChooseSuc;
-    }else if (loadStatus == 2){
+    }else if (_loadStatus == 2){
         self.regionAnnotation.annotationStatus = ChooseFail;
-    }else if (loadStatus == 3){
+    }else if (_loadStatus == 3){
         self.regionAnnotation.annotationStatus = NaviLoading;
-    }else if (loadStatus == 4){
+    }else if (_loadStatus == 4){
         //带导航按钮的点
         self.regionAnnotation.annotationStatus = NaviSuc;
-    }else if (loadStatus == 5){
+    }else if (_loadStatus == 5){
         self.regionAnnotation.annotationStatus = NaviFail;
     }
     [self.regionMapView addAnnotation:self.regionAnnotation];
@@ -474,7 +404,7 @@ QSearchViewController *QSVC;
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
     }
-    if ([annotation isKindOfClass:[regionAnnotation class]]) {
+    if ([annotation isKindOfClass:[RegionAnnotation class]]) {
         static NSString* identifier = @"MKAnnotationView";
         RegionAnnotationView *annotationView;
         
@@ -506,10 +436,10 @@ QSearchViewController *QSVC;
 - (void)updateAlert:(NSMutableDictionary *)navidic{
     self.navDic = navidic;
     [self getChangedLoc];
-    CLLocation *loc = [[CLLocation alloc] initWithLatitude:naviCoordsGd.latitude longitude:naviCoordsGd.longitude];
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(naviCoordsGd, 500, 500);
+    CLLocation *loc = [[CLLocation alloc] initWithLatitude:_naviCoordsGd.latitude longitude:_naviCoordsGd.longitude];
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(_naviCoordsGd, 500, 500);
     self.naviRegion = [self.regionMapView regionThatFits:viewRegion];
-    [self showAnnotation:loc coord:naviCoordsGd];
+    [self showAnnotation:loc coord:_naviCoordsGd];
     [self.regionMapView setRegion:self.naviRegion animated:YES];
 }
 

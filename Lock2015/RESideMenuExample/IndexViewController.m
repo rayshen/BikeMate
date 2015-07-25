@@ -28,11 +28,12 @@
         [self setConnectState:@"NO"];
     }
     
+    /*
     if ([AppDelegate getisOnlock]==YES) {
         [self setLockState:@"0"];
     }else{
         [self setLockState:@"1"];
-    }
+    }*/
     
     /**电池*/
     batteryvalue=[AppDelegate getBatteryinfo];

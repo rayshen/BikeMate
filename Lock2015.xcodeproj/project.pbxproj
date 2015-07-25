@@ -104,6 +104,8 @@
 		647C240B1B5E8E4300040667 /* QSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C24071B5E8E4300040667 /* QSearchViewController.m */; };
 		6491765D1B63AEC60051649C /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6491765A1B63AEC60051649C /* MapViewController.m */; };
 		6491765E1B63AEC60051649C /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6491765B1B63AEC60051649C /* MapViewController.xib */; };
+		649176621B63AF1C0051649C /* BikerouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649176601B63AF1C0051649C /* BikerouteViewController.m */; };
+		649176631B63AF1C0051649C /* BikerouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 649176611B63AF1C0051649C /* BikerouteViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -257,6 +259,9 @@
 		6491765A1B63AEC60051649C /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		6491765B1B63AEC60051649C /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		6491765C1B63AEC60051649C /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		6491765F1B63AF1C0051649C /* BikerouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BikerouteViewController.h; sourceTree = "<group>"; };
+		649176601B63AF1C0051649C /* BikerouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BikerouteViewController.m; sourceTree = "<group>"; };
+		649176611B63AF1C0051649C /* BikerouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BikerouteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,15 +403,18 @@
 				642AA4861B4D5EDC002D255D /* RecordViewController.xib */,
 				647C24011B5E8E4300040667 /* Routepolyline.h */,
 				647C24021B5E8E4300040667 /* Routepolyline.m */,
+				6491765C1B63AEC60051649C /* MapViewController.h */,
 				6491765A1B63AEC60051649C /* MapViewController.m */,
 				6491765B1B63AEC60051649C /* MapViewController.xib */,
-				6491765C1B63AEC60051649C /* MapViewController.h */,
 				647C24061B5E8E4300040667 /* QSearchViewController.h */,
 				647C24071B5E8E4300040667 /* QSearchViewController.m */,
 				642AA4911B4E0CA7002D255D /* HSDatePickerViewController */,
 				642AA43D1B4D3BE6002D255D /* BikefindViewController.h */,
 				642AA43E1B4D3BE6002D255D /* BikefindViewController.m */,
 				642AA48F1B4E0C4E002D255D /* BikefindViewController.xib */,
+				6491765F1B63AF1C0051649C /* BikerouteViewController.h */,
+				649176601B63AF1C0051649C /* BikerouteViewController.m */,
+				649176611B63AF1C0051649C /* BikerouteViewController.xib */,
 				642AA4401B4D3C29002D255D /* SettingViewController.h */,
 				642AA4411B4D3C29002D255D /* SettingViewController.m */,
 			);
@@ -656,6 +664,7 @@
 				6452A87D1B567EB40029A60E /* anjuke_icon_to_position1@2x.png in Resources */,
 				6452A87B1B567EB40029A60E /* anjuke_icon_to_position.png in Resources */,
 				6452A8871B567EB40029A60E /* wl_map_icon_1@2x.png in Resources */,
+				649176631B63AF1C0051649C /* BikerouteViewController.xib in Resources */,
 				642AA4901B4E0C4E002D255D /* BikefindViewController.xib in Resources */,
 				6452A87A1B567EB40029A60E /* anjuke_icon_itis_position@2x.png in Resources */,
 				6452A88D1B567EB40029A60E /* wl_map_icon_5@2x.png in Resources */,
@@ -745,6 +754,7 @@
 				642AA4711B4D4A04002D255D /* AFHTTPSessionManager.m in Sources */,
 				642AA4421B4D3C29002D255D /* SettingViewController.m in Sources */,
 				6405A5631B5FA80500BF84D1 /* CHKeychain.m in Sources */,
+				649176621B63AF1C0051649C /* BikerouteViewController.m in Sources */,
 				642AA4991B4E155C002D255D /* Networkoperation.m in Sources */,
 				642AA41F1B4D3330002D255D /* UIViewController+RESideMenu.m in Sources */,
 				646582A21B5399AB00B61BEA /* EAIntroView.m in Sources */,

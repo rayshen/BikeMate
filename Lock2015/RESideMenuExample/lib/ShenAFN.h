@@ -18,4 +18,5 @@
 - (void)sessionDownloadWithUrl:(NSString *)urlStr success:(void (^)(NSURL*fileURL))success fail:(void (^)())fail;
 - (void)uploadimgWithurl:(NSString *)urlStr image:(UIImage *)image fileName:(NSString *)fileName success:(void (^)(id responseObject))success fail:(void (^)())fail;
 - (void)uploadMutableimgWithurl:(NSString *)urlStr prename:(NSString*)prename imagearray:(NSMutableArray *)imgarray success:(void (^)(id responseObject))success fail:(void (^)())fail;
+- (void)getJSONWithUrl:(NSString *)urlStr parameters:(id)parameters success:(void (^)(id responseObject))success fail:(void (^)())fail;
 @end
