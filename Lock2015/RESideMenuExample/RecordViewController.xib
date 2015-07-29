@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
@@ -140,6 +141,19 @@
                         <action selector="tonavi:" destination="-1" eventType="touchUpInside" id="Ckc-7V-7RL"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVe-nX-Ls2">
+                    <rect key="frame" x="513" y="553" width="60" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="D1p-HY-ecP"/>
+                        <constraint firstAttribute="height" constant="30" id="EEw-hT-EOB"/>
+                    </constraints>
+                    <state key="normal" title="一键分享">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="sharebtn:" destination="-1" eventType="touchUpInside" id="YU0-EF-ccQ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -175,6 +189,7 @@
                 <constraint firstItem="Kdm-kK-iCg" firstAttribute="bottom" secondItem="7v1-1O-rCk" secondAttribute="bottom" constant="10" id="ZAR-mw-HkC"/>
                 <constraint firstItem="Pcp-08-ne0" firstAttribute="leading" secondItem="OjX-6O-RjS" secondAttribute="trailing" constant="8" id="b6d-HO-Qe0"/>
                 <constraint firstItem="7Fr-NR-RyY" firstAttribute="top" secondItem="Kdm-kK-iCg" secondAttribute="bottom" constant="21" id="c4M-sB-KY6"/>
+                <constraint firstAttribute="bottom" secondItem="KVe-nX-Ls2" secondAttribute="bottom" constant="17" id="cFd-p9-FI2"/>
                 <constraint firstItem="Kdm-kK-iCg" firstAttribute="bottom" secondItem="7v1-1O-rCk" secondAttribute="bottom" constant="6" id="cMl-eg-2x2"/>
                 <constraint firstAttribute="centerX" secondItem="OjX-6O-RjS" secondAttribute="centerX" constant="-0.5" id="cWJ-mb-9aj"/>
                 <constraint firstItem="7v1-1O-rCk" firstAttribute="top" secondItem="OjX-6O-RjS" secondAttribute="bottom" constant="-21" id="d7f-ff-wUB"/>
@@ -187,6 +202,7 @@
                 <constraint firstItem="7Fr-NR-RyY" firstAttribute="centerX" secondItem="OjX-6O-RjS" secondAttribute="centerX" constant="-1" id="ejO-ds-2XF"/>
                 <constraint firstItem="shH-3R-hrK" firstAttribute="top" secondItem="7v1-1O-rCk" secondAttribute="bottom" constant="10" id="gGG-6B-d07"/>
                 <constraint firstAttribute="centerX" secondItem="UL3-D2-BUo" secondAttribute="centerX" id="gKa-UQ-hti"/>
+                <constraint firstAttribute="trailing" secondItem="KVe-nX-Ls2" secondAttribute="trailing" constant="27" id="gzE-bZ-Zo0"/>
                 <constraint firstAttribute="trailing" secondItem="0Ce-zP-bcd" secondAttribute="trailing" constant="35" id="h4s-ZR-OK2"/>
                 <constraint firstItem="Kdm-kK-iCg" firstAttribute="top" secondItem="UL3-D2-BUo" secondAttribute="bottom" constant="8" id="h9Z-pA-7f1"/>
                 <constraint firstItem="7v1-1O-rCk" firstAttribute="bottom" secondItem="OjX-6O-RjS" secondAttribute="bottom" constant="47" id="i8X-xc-Tvt"/>

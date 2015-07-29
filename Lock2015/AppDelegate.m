@@ -10,7 +10,12 @@
 #import "DEMOLeftMenuViewController.h"
 #import "DEMORightMenuViewController.h"
 #import "IndexViewController.h"
-
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import "WXApi.h"
+#import "WeiboSDK.h"
 #define UUIDKEY @"UUID"
 
 static BOOL isAround;
@@ -37,6 +42,7 @@ static int Batteryinfo;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //第一次用于生成手机的UUID，之后直接读取
     [self uuid];
+    [self registshare];
     
     //[CHKeychain deleteData:@"LOCKUUID"];
     //看DIDUSED，是否第一次登陆
@@ -109,6 +115,70 @@ static int Batteryinfo;
 +(int)getBatteryinfo{
     return Batteryinfo;
 }
+
+-(void)registshare{
+    [ShareSDK registerApp:@"934ca560a424"
+          activePlatforms:@[@(SSDKPlatformTypeSinaWeibo), @(SSDKPlatformTypeTencentWeibo), @(SSDKPlatformTypeFacebook), @(SSDKPlatformTypeTwitter), @(SSDKPlatformTypeWechat), @(SSDKPlatformTypeQQ)]
+                 onImport:^(SSDKPlatformType platformType) {
+                     
+                     switch (platformType)
+                     {
+                         case SSDKPlatformTypeWechat:
+                             [ShareSDKConnector connectWeChat:[WXApi class]];
+                             break;
+                         case SSDKPlatformTypeQQ:
+                             [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
+                             break;
+                         default:
+                             break;
+                     }
+                     
+                 }
+          onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
+              
+              switch (platformType)
+              {
+                  case SSDKPlatformTypeSinaWeibo:
+                      //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
+                      [appInfo SSDKSetupSinaWeiboByAppKey:@"568898243"
+                                                appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
+                                              redirectUri:@"http://www.sharesdk.cn"
+                                                 authType:SSDKAuthTypeBoth];
+                      break;
+                  case SSDKPlatformTypeTencentWeibo:
+                      //设置腾讯微博应用信息，其中authType设置为只用Web形式授权
+                      [appInfo SSDKSetupTencentWeiboByAppKey:@"801307650"
+                                                   appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c"
+                                                 redirectUri:@"http://www.sharesdk.cn"];
+                      break;
+                  case SSDKPlatformTypeFacebook:
+                      //设置Facebook应用信息，其中authType设置为只用SSO形式授权
+                      [appInfo SSDKSetupFacebookByAppKey:@"107704292745179"
+                                               appSecret:@"38053202e1a5fe26c80c753071f0b573"
+                                                authType:SSDKAuthTypeBoth];
+                      break;
+                  case SSDKPlatformTypeTwitter:
+                      [appInfo SSDKSetupTwitterByConsumerKey:@"LRBM0H75rWrU9gNHvlEAA2aOy"
+                                              consumerSecret:@"gbeWsZvA9ELJSdoBzJ5oLKX0TU09UOwrzdGfo9Tg7DjyGuMe8G"
+                                                 redirectUri:@"http://mob.com"];
+                      break;
+                  case SSDKPlatformTypeWechat:
+                      [appInfo SSDKSetupWeChatByAppId:@"wx4868b35061f87885"
+                                            appSecret:@"64020361b8ec4c99936c0e3999a9f249"];
+                      break;
+                  case SSDKPlatformTypeQQ:
+                      [appInfo SSDKSetupQQByAppId:@"100371282"
+                                           appKey:@"aed9b0303e3ed1e27bae87c33761161d"
+                                         authType:SSDKAuthTypeSSO];
+                      break;
+                  default:
+                      break;
+              }
+              
+          }];
+
+}
+
 #pragma mark--获取设备UUID
 -(NSString*)uuid{
     if ([CHKeychain load:UUIDKEY]) {
