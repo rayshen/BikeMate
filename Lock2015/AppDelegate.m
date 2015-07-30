@@ -22,8 +22,6 @@ static BOOL isAround;
 static BOOL isConnect;
 static BOOL isOnlock;
 static BOOL isRingon;
-static BOOL isAutoSearch;
-
 static NSString* PhoneUUID;
 static NSString* LockUUID;
 static int Batteryinfo;

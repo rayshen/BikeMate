@@ -225,7 +225,7 @@
 #pragma mark - 文件上传 自己定义文件名
 - (void)postUploadWithUrl:(NSString *)urlStr fileUrl:(NSURL *)fileURL fileName:(NSString *)fileName fileType:(NSString *)fileTye success:(void (^)(id responseObject))success fail:(void (^)())fail
 {
-    NSURL *fileURL1 = [[NSBundle mainBundle] URLForResource:@"头像1.png" withExtension:nil];
+    // NSURL *fileURL1 = [[NSBundle mainBundle] URLForResource:@"头像1.png" withExtension:nil];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

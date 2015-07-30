@@ -118,7 +118,7 @@
         NSMutableDictionary *navidic=[recordData objectAtIndex:[indexPath row]];
         [self.delegate updateAlert:navidic];
     }else{
-        NSLog(@"number:%d",Resultarray.count);
+        NSLog(@"number:%ld",(long)Resultarray.count);
         
         NSMutableDictionary *thisresult=[Resultarray objectAtIndex:indexPath.row];
         NSDictionary *localtion=[thisresult objectForKey:@"location"];

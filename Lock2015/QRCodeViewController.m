@@ -43,7 +43,7 @@ NSString *LOCKUUID;
     labIntroudction= [[UILabel alloc] initWithFrame:CGRectMake(15, 40, self.view.bounds.size.width-30, 50)];
     labIntroudction.backgroundColor = [UIColor clearColor];
     labIntroudction.numberOfLines=2;
-    labIntroudction.textAlignment=UITextAlignmentCenter;
+    labIntroudction.textAlignment=NSTextAlignmentCenter;
     labIntroudction.textColor=[UIColor whiteColor];
     labIntroudction.text=@"扫描二维码，绑定您的智能车载系统";
     [self.view addSubview:labIntroudction];

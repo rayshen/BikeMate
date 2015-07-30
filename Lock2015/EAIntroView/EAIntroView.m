@@ -271,9 +271,9 @@
     }
     
     [self.pageBgFront setAlpha:1];
-    [self.pageBgFront setImage:[self bgForPage:page]];
+    [self.pageBgFront setImage:[self bgForPage:(int)page]];
     [self.pageBgBack setAlpha:0];
-    [self.pageBgBack setImage:[self bgForPage:page+1]];
+    [self.pageBgBack setImage:[self bgForPage:(int)page+1]];
     
     float backLayerAlpha = alphaValue;
     float frontLayerAlpha = (1 - alphaValue);
