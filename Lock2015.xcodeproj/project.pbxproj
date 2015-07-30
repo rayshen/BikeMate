@@ -734,6 +734,7 @@
 				TargetAttributes = {
 					642AA3EC1B4D331C002D255D = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = ARWLX5DTCE;
 					};
 				};
 			};
@@ -966,7 +967,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhiwei Shen (LC2MMP98TD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libraries/extends/QQSDK",
@@ -993,7 +994,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhiwei Shen (LC2MMP98TD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libraries/extends/QQSDK",
