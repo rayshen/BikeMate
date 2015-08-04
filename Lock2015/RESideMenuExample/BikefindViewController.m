@@ -14,19 +14,20 @@
 {
     [super viewDidLoad];
 	self.title = @"车辆找回";
-    self.view.backgroundColor = [UIColor colorWithRed:255/255.0 green:202/255.0 blue:101/255.0 alpha:1.0];
+    //self.view.backgroundColor = [UIColor colorWithRed:255/255.0 green:202/255.0 blue:101/255.0 alpha:1.0];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:nil
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(presentLeftMenuViewController:)];
     [self.navigationItem.leftBarButtonItem setImage:[UIImage imageNamed:@"burger"]];
-
+    
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    imageView.image = [UIImage imageNamed:@"pic1"];
+    imageView.image = [UIImage imageNamed:@"Balloon"];
     [self.view insertSubview:imageView atIndex:0];
+     
     
     [_bgview setBackgroundColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:0.5]];
     
