@@ -209,6 +209,7 @@ static int Batteryinfo;
 }
 
 -(void)alertSearchview{
+    //设置超时时间
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(searchResult:) userInfo:nil repeats:NO];
     HUD = [[MBProgressHUD alloc] initWithView:self.window];
     [self.window addSubview:HUD];
